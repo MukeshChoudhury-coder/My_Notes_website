@@ -1,0 +1,41 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+body {
+    font-family: "Inter", sans-serif;
+}
+
+:root {
+  /* Main Background */
+  --bg-primary: #0B0F0D;
+  --bg-secondary: #111815;
+  --bg-card: #151D19;
+
+  /* Green — Main Brand Color */
+  --green-primary: #7CFF9B;
+  --green-secondary: #4ADE80;
+  --green-dark: #22C55E;
+
+  /* Light Blue — Accent */
+  --blue-primary: #8BD3FF;
+  --blue-secondary: #60C5FA;
+
+  /* Text */
+  --text-primary: #F5F7F6;
+  --text-secondary: #A7B3AD;
+  --text-muted: #6F7D76;
+
+  /* Borders */
+  --border: #26332D;
+
+  /* Errors */
+  --danger: #FF6B6B;
+}
+
+/**
+
+**/

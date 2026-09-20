@@ -1,0 +1,185 @@
+.navbar{
+    width: 100%;
+    padding: 10px 0;
+}
+
+.navbarcontainer{
+ display: flex;
+    justify-content: space-between;
+    align-items: center;
+   padding: 0 20px;
+   margin: 0  10px;
+    background-color: #0B0F0D;
+ border-radius: 40px;
+ border: 1px solid #4ADE80;
+
+}
+.menucontainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.menubox{
+    width: 200px;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    top: 100px;
+    background-color: black;
+      position: absolute;
+      left: 4px;
+      bottom: 10px;
+      z-index: 1;
+      border-right: 3px solid #22C55E;
+      border-top-right-radius: 8px ;
+      border-bottom-right-radius: 8px ;
+      transition: all .9s;
+}
+
+.canclebtn{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    padding: 2px 5px;
+}
+.cancel{
+ cursor: pointer;
+}
+.logoDiv2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+.logo2{
+    width: 45px;
+}
+.my2{
+  font-size: 15px;
+  color: #F5F7F6;
+  font-weight: 550;
+}
+.Notes2{
+     font-size: 15px;
+     color: #4ADE80;
+     font-weight: 550;
+}
+.homeandnotesContainer{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+flex-direction: column;
+    padding: 10px 5px ;
+    margin: 10px 0;
+    gap: 20px;
+}
+.homeBtn , .notesBtn{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+    flex-direction: row;
+    padding: 10px 2px ;
+    border-radius: 8px;
+    font-family:"Inter", sans-serif ;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.menu{
+    padding: 5px 5px;
+    margin-left: 15px;
+    border-radius: 5px;
+   cursor: pointer;
+   transition:  all 0.5s;
+     position: relative;
+}
+.menu:hover{
+ background-color: #4ade807c;
+}
+
+.logoDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px;
+}
+.userInfo{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding:3px 10px;
+    margin-right: 8px;
+    border-radius: 10px;
+    border: 1px solid #4ADE80 ;
+}
+
+.userName{
+    color:#F5F7F6;
+   font-family: "Inter", sans-serif;
+     
+     font-size: 20px;
+}
+.my{
+    color:#F5F7F6;
+    font-size: 20px;
+    font-weight: 550;
+}
+.Notes{
+    color:#4ADE80;
+     font-size: 20px;
+      font-weight: 550;
+}
+.settingsection , .supportsection{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 1px 14px;
+   padding-top: 20px;
+    gap: 15px;
+    margin: 6px 1px;
+}
+.settings ,.support{
+    font-family: "Inter", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: #A7B3AD;
+}
+.profile , .help , .feedback{
+    width: 100%;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ flex-direction: row;
+ padding: 5px 2px;
+background: transparent;
+border: none;
+cursor: pointer;
+color: #A7B3AD;
+font-size: 12px;
+}
+.logout{
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+     padding: 0 10px;
+    padding-bottom:30px ;
+   
+}
+.logoutbtn{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 0;
+    border: transparent;
+    background: transparent;
+    font-family:"Inter", sans-serif ;
+    font-size: 15px;
+    font-weight: 600;
+    color: #FF6B6B;
+}
