@@ -15,7 +15,7 @@ function NotesPage(){
             <div className={styles.searchfiltersection}>
                 <div className={styles.inptsearch}>
                         <Search color="#4ADE80" />
-                        <input type="Text" placeholder='Search your notes.....' className={styles.searchinpt} 
+                        <input type="Text" placeholder='Search by Subject.....' className={styles.searchinpt} 
                        />
                     </div>
 
@@ -40,17 +40,8 @@ function NotesPage(){
                 <div className={styles.notescontainer}>
                     {getNote.map((e)=>{
                         return <div className={styles.notes} key={e._id}>
-                            <p className={styles.title}>{e.title}</p>
-                            <p className={styles.note}>{e.notes}</p>
-            
-                           
-                           <div className={styles.editdeletebtn}>
-                            <button className={styles.editbtn}><Pen  size={19}/></button>
-
-                            <button className={styles.deletebtn} 
-                            onClick={()=>deleteId(e._id )}
-                            ><Trash strokeWidth={2} size={19} /></button>
-                           </div>
+                            <p className={styles.title}>{e.subject}</p>
+                          
                         </div>
                     })}
                 </div>

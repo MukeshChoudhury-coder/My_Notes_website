@@ -2,9 +2,9 @@ import styles from '../Css_folder/Navbar.module.css'
 import {CircleUserRound , Plus , Bookmark , X, Menu ,UserRoundPen ,ChevronRight ,Settings ,Moon , CircleQuestionMark , MessageSquare , LogOut} from "lucide-react"
 import { useContext} from "react";
 import { proContext } from "../Provider/Provider";
-import { Link } from 'react-router-dom';
+import { ClipLoader } from "react-spinners";
 function Navbar(){
-    const {userData , homeNotes, setHomeNotes ,manubar ,  setManuBra}=useContext(proContext)
+    const {userData , homeNotes, setHomeNotes ,manubar ,  setManuBra ,logOutUser,spin}=useContext(proContext)
 
 
 
@@ -87,9 +87,9 @@ function Navbar(){
 
        <div className={styles.logout}>
 
-      <button className={styles.logoutbtn}>
-           <p>LogOut ?</p>
-         <LogOut size={16} strokeWidth={1.75} color='#FF6B6B'/>
+      <button className={styles.logoutbtn} onClick={()=>logOutUser()}> 
+         {spin==="enable"? <ClipLoader color='#FF6B6B' size={20} /> : (<>  <p>LogOut </p>
+         <LogOut size={16} strokeWidth={1.75} color='#FF6B6B'/></>)}
       </button>
        </div>
           </div>

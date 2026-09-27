@@ -9,7 +9,7 @@ const homePage=require("./controller/getHome")
 const login=require("./controller/login")
 const addNote= require("./controller/addNote")
 const sendNote= require("./controller/sendNote")
-const deleteNote= require("./controller/deleteNote")
+const logOut= require("./controller/logOut")
 //-------------------------------------------//
 
  dotenv.config()
@@ -29,7 +29,7 @@ app.post("/user/login",login )
 app.get("/user/home", midd,homePage )
 app.post("/user/notes", midd, addNote )
 app.get("/user/getnote", midd, sendNote)
-app.delete("/user/notedelete/", midd, deleteNote)
+app.post("/user/logout", logOut)
 
 //---------------------------------------//
 

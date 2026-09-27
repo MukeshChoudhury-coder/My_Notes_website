@@ -43,6 +43,7 @@ top: 20px;
     margin: 10px 10px;
     border: 1px solid #A7B3AD;
     border-radius: 18px;
+    background-color: #07131C;
 }
 .createnotecontainer{
     width: 100%;
@@ -91,20 +92,28 @@ top: 20px;
     width: 95%;
     display:flex ;
     justify-content: center;
-    flex-direction: column;
+    flex-direction: row;
     padding: 5px 0;
     gap:10px;
+   
+}
+.noteLabeldivs{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
 }
 .noteLabeldiv{
-    height: 55px;
+    height: 40px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-direction: row;
     margin: 0 5px;
-    gap: 10px;
+    gap: 15px;
     border: 1px solid #22C55E;
-    border-radius: 15px;
+    border-radius: 8px;
     padding: 0 10px;
 }
 .noteLabelinput{
@@ -123,6 +132,12 @@ top: 20px;
    font-family: "Inter", sans-serif;
    font-size: 18px;
    color: #F5F7F6;
+   font-weight: 500;
+}
+.noteLabeltitletwo{
+    font-family: "Inter", sans-serif;
+   font-size: 12px;
+   color: #A7B3AD;
    font-weight: 500;
 }
 .noteLabel2{
@@ -148,7 +163,7 @@ top: 20px;
     margin: 0 5px;
     gap: 10px;
     border: 1px solid #22C55E;
-    border-radius: 15px;
+    border-radius: 8px;
     padding: 0 10px;
 }
 .noteLabelinput2{
@@ -157,11 +172,12 @@ top: 20px;
     background: transparent;
     border: none;
     outline: none;
-    border-radius: 15px;
+    border-radius: 8px;
     color: #A7B3AD;
     font-family: "Inter", sans-serif;
     font-size: 15px;
     padding-top: 60px;
+  
 }
 .savenotebtn{
     display: flex;

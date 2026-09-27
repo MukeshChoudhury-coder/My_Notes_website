@@ -20,7 +20,7 @@ const { setSigninLogin , userLogin , setUserLogin ,login , spin,message } = useC
                 <form  onSubmit={(e)=>{
                     e.preventDefault()
                     login()
-                    setUserLogin({email:"" , password:""})
+                 
                 }}>
                   <label>
                     <p className={styles.lablePara}>Email</p>

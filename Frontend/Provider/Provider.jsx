@@ -43,6 +43,8 @@ const [manubar ,  setManuBra]=useState("hidden")
            if(res.ok){
            await getHomePage();
            await getNotes();
+          
+
            setSpin("disable")
            }else if(!res.ok){
             if (res.status === 501) {
@@ -61,7 +63,7 @@ const [manubar ,  setManuBra]=useState("hidden")
             setMessage("")
          },1000)
     }
-
+   
 //----------------------- XXXXXXXXX-----------------//
 //------------- API CALL FOR HOME PAGE-------------//
 
@@ -134,7 +136,7 @@ setSpin("enable")
 //-------------- NOTES LOGIN STARTS HERE-------//
       //---------1. ADD NOTES LOGIC----------//
     
-      const [userNote ,  setUserNote]=useState({ title: "" , notes: ""})
+      const [userNote ,  setUserNote]=useState({ subject:"" ,  chapter:"" , notes:""})
 
       const notesData= async()=>{
     
@@ -186,25 +188,37 @@ setSpin("enable")
      },[getNotes]) 
 
     //-----------DELETE NOTES LOGIC-------------//
-     const deleteId=useCallback(async(id)=>{
-        console.log(id)
-        try{
-           const res= await fetch(`http://localhost:3001/user/notedelete/?id=${id}`,{
-            method:"DELETE",
-            credentials:"include"
-           })
+    
 
-           if(res.ok){
-            const data= await res.json()
-            console.log(data.message)
-           }else if(!res.ok){
-            if (res.status === 501) {
-                   navigate("/wentwrong");
+     //-------------LOGPOUT USER LOGIC------------//
+
+     const logOutUser=useCallback(async()=>{
+               setSpin("enable")
+               try{
+                 const res= await fetch(`http://localhost:3001/user/logout`,{
+                    method:"POST",
+                    credentials:"include"
+                 })  
+    
+                  
+                   
+                   if(res.ok){
+                    
+                        const data= await res.json()
+                  console.log(data.message)
+                    setSpin("disable")
+                        navigate("/")
                    }
-           }
-        }catch{
-            console.log(err)
-        }
+                    
+                    if(res.status!==201){
+                        setSpin("disable")
+                         navigate('/wentwrong')
+                    }else if(res.status===404){
+                        navigate('/wentwrong')
+                    }
+               }catch(err){
+                console.log("error")
+               }
      },[])
     return(
         <>
@@ -218,8 +232,10 @@ setSpin("enable")
       //--------------CREATE NOTES LOGIN STARTS HERE-------//
       //---------1. ADD NOTES LOGIC----------//
       userNote ,  setUserNote , notesData ,getNote,
-      //-----------Delete varieble---------//
-      deleteId
+      //-----------Delete variables---------//
+      
+      //----------logout variables----------//
+      logOutUser
         }}>
             {children}
         </proContext.Provider>

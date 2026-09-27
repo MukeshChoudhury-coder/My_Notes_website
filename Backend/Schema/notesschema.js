@@ -5,9 +5,13 @@ const notesSchema= new mongoose.Schema({
         type:String,
         required:true
     },
-    title:{
+   subject:{
         type:String,
         required:true
+    },
+    chapter:{
+        type:String,
+        require:true
     },
     notes:{
         type:String,

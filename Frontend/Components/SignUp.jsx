@@ -25,7 +25,7 @@ function SignUp(){
                     <p className={styles.lablePara}>Full name</p>
                     <div className={styles.lableDiv}>
                         <Mail color="#4ADE80"  />
-                        <input type="text" placeholder='Enter your full name'  className={styles.lableInput}      value={createAccount.name}
+                        <input type="text" placeholder='Enter your full name'  className={styles.lableInput}      value={createAccount?.name}
                         onChange={(e)=>setCreateAccount({...createAccount, name:e.target.value})}
                         required/>
                     </div>
@@ -37,7 +37,7 @@ function SignUp(){
                     <div className={styles.lableDiv}>
                         <Mail color="#4ADE80"  />
                         <input type="email" placeholder='Enter your email'  className={styles.lableInput}
-                        value={createAccount.email}
+                        value={createAccount?.email}
                         onChange={(e)=>setCreateAccount({...createAccount, email:e.target.value})}
                         required/>
                     </div>
@@ -49,7 +49,7 @@ function SignUp(){
                     <div className={styles.lableDiv}>
                         <LockKeyhole color="#4ADE80" />
                         <input type="password" placeholder='Enter your password' className={styles.lableInput} 
-                        value={createAccount.password}
+                        value={createAccount?.password}
                         onChange={(e)=>setCreateAccount({...createAccount, password:e.target.value})}
                         required/>
                     </div>

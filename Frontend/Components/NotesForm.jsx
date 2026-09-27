@@ -1,7 +1,7 @@
 import styles from '../Css_folder/NotesForm.module.css'
 import { useContext } from 'react'
 import { proContext } from '../Provider/Provider'
-import { StickyNotePlus , Type , Pencil , Save} from "lucide-react"
+import { StickyNotePlus , BookOpenText , Pencil , Save , StickyNotes} from "lucide-react"
 function NotesForm(){
     const {userData, userNote ,  setUserNote ,notesData}=useContext(proContext)
     return(
@@ -16,7 +16,7 @@ function NotesForm(){
             <StickyNotePlus size={50} strokeWidth={1.75}  color='#22C55E'/>
            <div className={styles.createnote} >
             <p className={styles.create}>Create <span className={styles.notes}>Note</span></p>
-               <p className={styles.createnotesmallmessage}>Write you thoughts, Ideas and keep them safe.</p>
+               <p className={styles.createnotesmallmessage}>Add your Subject, Chaoter and Write you notes. Keep your study organized.</p>
             </div>
          </div>
         
@@ -25,24 +25,43 @@ function NotesForm(){
         e.preventDefault();
         notesData()
         setUserNote({
-    title: "",
-    notes: ""
+     subject:"" , 
+      chapter:"" , 
+      notes:""
   });
        }}
        >
          <label className={styles.noteLabel}>
-            <p className={styles.noteLabeltitle}>Title</p>
+
+           <div className={styles.noteLabeldivs}>
+             <p className={styles.noteLabeltitle}>Subject</p>
+            <p className={styles.noteLabeltitletwo}>Enter the subject name (e.g. Computer Science, Physics, etc.)</p>
             <div className={styles.noteLabeldiv}>
-                <Type size={30} strokeWidth={1.75}  color='#22C55E'/>
+                <BookOpenText strokeWidth={2} color='#22C55E' />
                 <input type="text"  placeholder='Enter your Title...' className={styles.noteLabelinput}
-                value={userNote.title}
-                onChange={(e)=>setUserNote({...userNote, title:e.target.value})}
+                value={userNote.subject}
+                onChange={(e)=>setUserNote({...userNote, subject:e.target.value})}
                  required></input>
+            </div>
+           </div>
+
+            <div className={styles.noteLabeldivs}>
+                  <p className={styles.noteLabeltitle}>Chapter</p>
+            <p className={styles.noteLabeltitletwo}>Enter the chapter name (e.g. Data Structure,  Thermodynamics, etc)</p>
+            <div className={styles.noteLabeldiv}>
+                <StickyNotes strokeWidth={1.25}  color='#22C55E' />
+                <input type="text"  placeholder='Enter your Title...' className={styles.noteLabelinput}
+                value={userNote.chapter}
+                onChange={(e)=>setUserNote({...userNote, chapter:e.target.value})}
+                 required></input>
+            </div>
             </div>
         </label>
 
+        
+
         <label className={styles.noteLabel2}>
-            <p className={styles.noteLabelcontent}>Content</p>
+            <p className={styles.noteLabelcontent}>Your Notes</p>
             <div className={styles.noteLabeldiv2}>
                <Pencil size={30} strokeWidth={1} color='#22C55E' />
                 <textarea type="text"  placeholder='Start writing your note here..' rows={10} className={styles.noteLabelinput2}

@@ -2,10 +2,10 @@ const notesDB =  require("../Schema/notesschema")
 
 const addNote= async(req, res)=>{
 const usersID= req.use.userId
-const {title, notes}= req.body
+const {subject , chapter, notes}= req.body
 
 try{
-  const addNote= await notesDB.create({usersID , title , notes})
+  const addNote= await notesDB.create({usersID , subject , chapter, notes})
        
         res.status(200).json({message:"note added"})
        console.log(addNote)
