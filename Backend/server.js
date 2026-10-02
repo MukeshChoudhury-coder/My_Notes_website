@@ -8,8 +8,9 @@ const midd=require("./AuthMiddleware/middleware")
 const homePage=require("./controller/getHome")
 const login=require("./controller/login")
 const addNote= require("./controller/addNote")
-const sendNote= require("./controller/sendNote")
+const sendSubjectName= require("./controller/sendSubjectName")
 const logOut= require("./controller/logOut")
+const sendSubDetails= require("./controller/sendSubjectDetail")
 //-------------------------------------------//
 
  dotenv.config()
@@ -28,7 +29,8 @@ app.post("/user/signup",userSignUp)
 app.post("/user/login",login )
 app.get("/user/home", midd,homePage )
 app.post("/user/notes", midd, addNote )
-app.get("/user/getnote", midd, sendNote)
+app.get("/user/getnote", midd, sendSubjectName)
+app.get("/user/subDeatial", midd, sendSubDetails)
 app.post("/user/logout", logOut)
 
 //---------------------------------------//

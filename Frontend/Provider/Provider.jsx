@@ -163,9 +163,9 @@ setSpin("enable")
       }
 
       //---------GETNOTE FROM BACKEND---------------------//
-      const [getNote , setGetNote]=useState([])
-
-      const  getNotes= useCallback(async()=>{
+      const [Notes , setGetNote]=useState([])
+      const [subjectName , setSubjectName]=useState([])
+      const  getSubjectName= async()=>{
         try{
             const res= await fetch("http://localhost:3001/user/getnote",{
                 method:"GET",
@@ -174,23 +174,35 @@ setSpin("enable")
 
             if(res.ok){
                 const data= await res.json()
-                setGetNote(data)
-                console.log(getNote)
+                setSubjectName(data)
             }
 
         }catch(err){
             console.log(err)
         }
-      },[])
+      }
  
     useEffect(()=>{
-        getNotes()
-     },[getNotes]) 
+        getSubjectName()
+     },[getSubjectName]) 
+   
 
-    //-----------DELETE NOTES LOGIC-------------//
+    //-----------GET SUBJECTS DETAIL -------------//
     
+    const getSubjectDeatils=useCallback(async (val)=>{
+      try{
+        const res = await fetch(`http://localhost:3001/user/subDeatial/?sub=${val}`,{method:"GET" , credentials:'include'})
 
-     //-------------LOGPOUT USER LOGIC------------//
+        if(res.ok){
+            const data= await res.json()
+            console.log(data)
+        }
+      }catch(err){
+        console.log(err)
+      }
+    },[])
+
+     //-------------LOGOUT USER LOGIC------------//
 
      const logOutUser=useCallback(async()=>{
                setSpin("enable")
@@ -231,9 +243,9 @@ setSpin("enable")
       userLogin , setUserLogin,login , homeNotes, setHomeNotes,
       //--------------CREATE NOTES LOGIN STARTS HERE-------//
       //---------1. ADD NOTES LOGIC----------//
-      userNote ,  setUserNote , notesData ,getNote,
-      //-----------Delete variables---------//
-      
+      userNote ,  setUserNote , notesData ,subjectName,
+      //-----------get seubect detail---------//
+      getSubjectDeatils,
       //----------logout variables----------//
       logOutUser
         }}>
