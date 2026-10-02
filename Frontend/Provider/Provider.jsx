@@ -163,7 +163,6 @@ setSpin("enable")
       }
 
       //---------GETNOTE FROM BACKEND---------------------//
-      const [Notes , setGetNote]=useState([])
       const [subjectName , setSubjectName]=useState([])
       const  getSubjectName= async()=>{
         try{
@@ -188,7 +187,7 @@ setSpin("enable")
    
 
     //-----------GET SUBJECTS DETAIL -------------//
-    
+     const [Notes , setGetNote]=useState([])
     const getSubjectDeatils=useCallback(async (val)=>{
       try{
         const res = await fetch(`http://localhost:3001/user/subDeatial/?sub=${val}`,{method:"GET" , credentials:'include'})
@@ -196,6 +195,8 @@ setSpin("enable")
         if(res.ok){
             const data= await res.json()
             console.log(data)
+            setGetNote(data)
+            navigate("/subjectdetail")
         }
       }catch(err){
         console.log(err)
@@ -245,7 +246,7 @@ setSpin("enable")
       //---------1. ADD NOTES LOGIC----------//
       userNote ,  setUserNote , notesData ,subjectName,
       //-----------get seubect detail---------//
-      getSubjectDeatils,
+      getSubjectDeatils,Notes,
       //----------logout variables----------//
       logOutUser
         }}>
