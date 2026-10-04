@@ -42,7 +42,7 @@ const [manubar ,  setManuBra]=useState("hidden")
         
            if(res.ok){
            await getHomePage();
-           await getNotes();
+           await getSubjectName();
           
 
            setSpin("disable")
@@ -95,6 +95,7 @@ useEffect(()=>{
 getHomePage()
 },[])
 
+//------
 //---------------LOGIN LOGIC---------------//
 const [userLogin , setUserLogin]=useState({email:"" , password:""})
 
@@ -113,7 +114,7 @@ setSpin("enable")
             setMessage(data.message)
         if(res.ok){
              await getHomePage();
-             await getNotes()
+           await getSubjectName()
              setSpin("disable")
         }else if(!res.ok){
             if (res.status === 501) {
@@ -131,7 +132,7 @@ setSpin("enable")
             setMessage("")
          },1000)
 }
-//----------------XXXXXXXXX--------------------//
+//----------XXXXXXXXX--------------------//
 
 //-------------- NOTES LOGIN STARTS HERE-------//
       //---------1. ADD NOTES LOGIC----------//
@@ -189,14 +190,18 @@ setSpin("enable")
     //-----------GET SUBJECTS DETAIL -------------//
      const [Notes , setGetNote]=useState([])
     const getSubjectDeatils=useCallback(async (val)=>{
+          setSpin("enable")
       try{
         const res = await fetch(`http://localhost:3001/user/subDeatial/?sub=${val}`,{method:"GET" , credentials:'include'})
 
         if(res.ok){
             const data= await res.json()
-            console.log(data)
             setGetNote(data)
             navigate("/subjectdetail")
+              setSpin("disable")
+        }
+        if(res.ok!==200){
+             setSpin("disable")
         }
       }catch(err){
         console.log(err)
@@ -204,7 +209,6 @@ setSpin("enable")
     },[])
 
      //-------------LOGOUT USER LOGIC------------//
-
      const logOutUser=useCallback(async()=>{
                setSpin("enable")
                try{
@@ -233,6 +237,34 @@ setSpin("enable")
                 console.log("error")
                }
      },[])
+
+     //-------------DELETE NOTE LOGIC-------------//
+     const [ids , setIds]=useState("")
+     const deleteNote= useCallback(async(id)=>{
+    
+        try{
+            const res= await fetch(`http://localhost:3001/user/delete/?noteId=${id}`, {
+                method:"DELETE",
+                credentials:"include"
+            })
+
+            if( res.ok){
+                const data= await res.json()
+                console.log(data.message)
+
+            // UI se note remove
+            setGetNote((oldNotes) =>
+                oldNotes.filter((note) => note._id !== id)
+            );
+            }
+        }catch(err){
+            console.log(err)
+        }
+     },[])
+
+     useEffect(()=>{
+      deleteNote()  
+     },[deleteNote])
     return(
         <>
         <proContext.Provider value={{
@@ -248,7 +280,9 @@ setSpin("enable")
       //-----------get seubect detail---------//
       getSubjectDeatils,Notes,
       //----------logout variables----------//
-      logOutUser
+      logOutUser,
+      //-----------delete note variable--------//
+      deleteNote
         }}>
             {children}
         </proContext.Provider>
