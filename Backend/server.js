@@ -38,6 +38,8 @@ app.delete("/user/delete",midd, deleteNote)
 //---------------------------------------//
 
 
-app.listen(3001,()=>{
-    console.log("server live at http://localhost:3001")
-})
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server live on port ${PORT}`);
+});
