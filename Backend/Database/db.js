@@ -2,7 +2,7 @@ const  mongoose = require("mongoose")
 
 const connectDB= async()=>{
  try{
-      await mongoose.connect(process.env.DataBase_Cluster)
+      await mongoose.connect(process.env.Data_base)
 
         console.log("connected")
   

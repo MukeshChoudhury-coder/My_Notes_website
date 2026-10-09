@@ -19,6 +19,12 @@ const [manubar ,  setManuBra]=useState("hidden")
 //---------XXXXXXXXXXXXXX-------------------------//
     //---------- USENAVIGAET VARIABLE----------//
     const navigate=useNavigate()
+    const backNavigation=()=>{
+       navigate('/home')
+    }
+    useCallback(()=>{
+       backNavigation()
+    },[])
     //------ EventListener on SIGNUP-LOGIN buttons-----//
     const [signinLogin, setSigninLogin]=useState("disable")
     //-------------------------------------------------//
@@ -204,6 +210,33 @@ setSpin("enable")
       }
     },[])
 
+    //----------- CHAPTER DETAIL------------//
+    const [chapter , setChapter]=useState()
+    const getChapterDetails=async(Id)=>{
+   setSpin("enable")
+       
+       try{
+         const res= await fetch(`http://localhost:3001/user/chapter/?ID=${Id}`,{method:"GET", credentials:'include'})   
+
+         if(res.ok){
+            const data= await res.json()
+           setChapter(data)
+           console.log(data)
+           setSpin("disable")
+           navigate("/chapterdetail")
+         }
+         if(res.status!==200){
+             setSpin("disable")
+         }
+
+       }catch(err){
+        console.log(err)
+       }
+    }
+     useCallback(()=>{
+       getChapterDetails()
+     },[])
+  
      //-------------LOGOUT USER LOGIC------------//
      const logOutUser=useCallback(async()=>{
                setSpin("enable")
@@ -260,6 +293,8 @@ setSpin("enable")
     return(
         <>
         <proContext.Provider value={{
+            //----------navigate page-------//
+            backNavigation,
             //--------buttons functionality----------//
             manubar ,  setManuBra,spin,
             //----- all the  signup variebles and functions---------------// 
@@ -274,7 +309,9 @@ setSpin("enable")
       //----------logout variables----------//
       logOutUser,
       //-----------delete note variable--------//
-      deleteNote
+      deleteNote,
+      //--------chapter detail --------//
+      getChapterDetails,chapter
         }}>
             {children}
         </proContext.Provider>

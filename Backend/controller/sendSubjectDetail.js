@@ -5,6 +5,7 @@ async function sendSubDetails(req, res){
  
  try{
     const subjects= await notesDB.find({subject:userSubject})
+    
  res.status(200).json(subjects)
  }catch(err){
     console.log(err)

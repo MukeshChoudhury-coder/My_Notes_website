@@ -3,6 +3,7 @@ import Registration from '../Components/Registration';
 import Home from '../Components/Home';
 import SomethingWentWrong from '../Components/SomethingWentWrong';
 import SubjectDetails from '../Components/SubjectDetails';
+import ChapterDetail from '../Components/ChapterDetails';
  import { useContext } from 'react';
  import { proContext } from '../Provider/Provider';
 
@@ -17,6 +18,7 @@ const {createAccountStatus }=useContext(proContext)
         <Route path='/home' element={<Home /> }/>
         <Route path='/wentwrong' element={<SomethingWentWrong /> }/>
         <Route path="/subjectdetail" element={<SubjectDetails /> }/>
+        <Route path="/chapterdetail" element={<ChapterDetail /> }/>
       
       </Routes>
     </>
