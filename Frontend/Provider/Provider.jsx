@@ -25,7 +25,6 @@ const [manubar ,  setManuBra]=useState("hidden")
 
     //----------------CREATE ACCOUNT -----------------//
     const [ createAccount, setCreateAccount]=useState({ name:"", email:"",password:""})
-     const [userData , setUserData]=useState({})
     async function createUserAccount(){
          setSpin("enable")
         try{
@@ -42,9 +41,7 @@ const [manubar ,  setManuBra]=useState("hidden")
         
            if(res.ok){
            await getHomePage();
-           await getSubjectName();
-          
-
+           await getSubjectName()
            setSpin("disable")
            }else if(!res.ok){
             if (res.status === 501) {
@@ -66,7 +63,7 @@ const [manubar ,  setManuBra]=useState("hidden")
    
 //----------------------- XXXXXXXXX-----------------//
 //------------- API CALL FOR HOME PAGE-------------//
-
+  const [userData , setUserData]=useState({})
 async function getHomePage(){
     try{
         const res= await fetch(`http://localhost:3001/user/home`,{
@@ -78,7 +75,6 @@ async function getHomePage(){
             const data= await res.json()
             setUserData(data)
             setCreateAccount(data.message)
-         
               navigate("/home")
         }else if(!res.ok){
             if (res.status === 501) {
@@ -114,7 +110,7 @@ setSpin("enable")
             setMessage(data.message)
         if(res.ok){
              await getHomePage();
-           await getSubjectName()
+             await getSubjectName()
              setSpin("disable")
         }else if(!res.ok){
             if (res.status === 501) {
@@ -239,7 +235,6 @@ setSpin("enable")
      },[])
 
      //-------------DELETE NOTE LOGIC-------------//
-     const [ids , setIds]=useState("")
      const deleteNote= useCallback(async(id)=>{
     
         try{
@@ -262,9 +257,6 @@ setSpin("enable")
         }
      },[])
 
-     useEffect(()=>{
-      deleteNote()  
-     },[deleteNote])
     return(
         <>
         <proContext.Provider value={{

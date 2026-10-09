@@ -14,17 +14,19 @@ function NotesPage(){
 
             <div className={styles.userNotes}>
                 <div className={styles.notescount}>
-                        <p className={styles.notescountp}> Total Notes </p>
+                        <p className={styles.notescountp}> Total Subjects </p>
                         <p>0</p>
                 </div>
 
                 <div className={styles.notescontainer}>
-                    {subjectName.map((e,index)=>{
+                    {subjectName.length===0? <p>Empty</p>: (<>
+                      {subjectName.map((e,index)=>{
                         return <div className={styles.notes} key={index} onClick={()=>getSubjectDeatils(e.subject)}>
                             <p className={styles.title}>{e.subject}</p>
                             <MoveRight color="#F5F7F6" />
                         </div>
                     })}
+                    </>)}
                 </div>
             </div>
 

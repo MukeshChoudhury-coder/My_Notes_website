@@ -7,7 +7,7 @@ try{
 const notes= await notesDB.find({ usersID:userid})
 
 if(notes.length===0){
-    res.status(400).json({message:" empty!"})
+    res.status(400).json([])
 }else{
    let subName={}
 
