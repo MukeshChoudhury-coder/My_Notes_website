@@ -22,6 +22,9 @@ const [manubar ,  setManuBra]=useState("hidden")
     const backNavigation=()=>{
        navigate('/home')
     }
+    const backToSubject=()=>{
+        navigate('/subjectdetail')
+    }
     useCallback(()=>{
        backNavigation()
     },[])
@@ -48,6 +51,7 @@ const [manubar ,  setManuBra]=useState("hidden")
            if(res.ok){
            await getHomePage();
            await getSubjectName()
+             navigate("/home");
            setSpin("disable")
            }else if(!res.ok){
             if (res.status === 501) {
@@ -81,7 +85,6 @@ async function getHomePage(){
             const data= await res.json()
             setUserData(data)
             setCreateAccount(data.message)
-              navigate("/home")
         }else if(!res.ok){
             if (res.status === 501) {
                    navigate("/wentwrong");
@@ -117,6 +120,7 @@ setSpin("enable")
         if(res.ok){
              await getHomePage();
              await getSubjectName()
+               navigate("/home");
              setSpin("disable")
         }else if(!res.ok){
             if (res.status === 501) {
@@ -190,7 +194,11 @@ setSpin("enable")
    
 
     //-----------GET SUBJECTS DETAIL -------------//
-     const [Notes , setGetNote]=useState([])
+    const [Notes, setGetNote] = useState(() => {
+  const savedNotes = localStorage.getItem("subjectName");
+
+  return savedNotes ? JSON.parse(savedNotes) : [];
+});
     const getSubjectDeatils=useCallback(async (val)=>{
           setSpin("enable")
       try{
@@ -199,6 +207,8 @@ setSpin("enable")
         if(res.ok){
             const data= await res.json()
             setGetNote(data)
+              localStorage.setItem("subjectName", JSON.stringify(data));
+            
             navigate("/subjectdetail")
               setSpin("disable")
         }
@@ -211,32 +221,54 @@ setSpin("enable")
     },[])
 
     //----------- CHAPTER DETAIL------------//
-    const [chapter , setChapter]=useState()
-    const getChapterDetails=async(Id)=>{
-   setSpin("enable")
-       
-       try{
-         const res= await fetch(`http://localhost:3001/user/chapter/?ID=${Id}`,{method:"GET", credentials:'include'})   
+    const [chapter , setChapter]=useState({})
+    const getChapterDetails = async (Id) => {
+       setSpin("enable");
 
-         if(res.ok){
-            const data= await res.json()
-           setChapter(data)
-           console.log(data)
-           setSpin("disable")
-           navigate("/chapterdetail")
-         }
-         if(res.status!==200){
-             setSpin("disable")
-         }
+      try {
+        const res = await fetch(
+      `http://localhost:3001/user/chapter/?ID=${Id}`,
+      {
+        method: "GET",
+        credentials: "include",
+      }
+    );
 
-       }catch(err){
-        console.log(err)
-       }
+    const data = await res.json();
+
+    if (!res.ok) {
+      throw new Error(data.message || "Failed to fetch chapter");
     }
+    
+    setChapter(data);
+  } catch (err) {
+    console.log(err);
+  } finally {
+    setSpin("disable");
+  }
+};
+
+     //------------UPDATE NOTES-----------------//
+     const updateNote=async()=>{
+        try{
+             const res= await fetch(`http://localhost:3001/user/update`,{
+                method:"PUT",
+                headers:{"Content-Type": "application/json"},
+                credentials:'include',
+                body:JSON.stringify(chapter)
+             })
+             if(res.ok){
+                const data= await res.json()
+                console.log(data)
+             }
+        }catch(err){
+            console.log(err)
+        }
+     }
+
      useCallback(()=>{
-       getChapterDetails()
+        updateNote()
      },[])
-  
      //-------------LOGOUT USER LOGIC------------//
      const logOutUser=useCallback(async()=>{
                setSpin("enable")
@@ -294,7 +326,7 @@ setSpin("enable")
         <>
         <proContext.Provider value={{
             //----------navigate page-------//
-            backNavigation,
+            backNavigation,navigate, backToSubject ,
             //--------buttons functionality----------//
             manubar ,  setManuBra,spin,
             //----- all the  signup variebles and functions---------------// 
@@ -311,7 +343,7 @@ setSpin("enable")
       //-----------delete note variable--------//
       deleteNote,
       //--------chapter detail --------//
-      getChapterDetails,chapter
+      getChapterDetails,chapter,updateNote
         }}>
             {children}
         </proContext.Provider>

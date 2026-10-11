@@ -1,0 +1,229 @@
+
+/* Main Container */
+
+.newcontainer {
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 10px 5% 30px;
+  color: #e8f0ed;
+  background-color: #000000;
+}
+
+/* Back Arrow */
+.backArrow {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #b7f7c5;
+  cursor: pointer;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.backArrow:hover {
+  background-color: #1c2b25;
+}
+
+/* Form */
+.chapterForm {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Chapter and Notes Labels */
+.chapterlabel,
+.noteslabel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #e8f0ed;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* Label Text */
+.chapterlabel p,
+.noteslabel p {
+  margin: 0;
+  color: #b7f7c5;
+  font-size: 14px;
+}
+
+/* Chapter Input */
+.chapterlabel input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  background-color: #111111;
+  color: #b7f7c5;
+  border: 1px solid #354740;
+  border-radius: 6px;
+  font-size: 15px;
+  outline: none;
+}
+
+.chapterlabel input:focus {
+  border-color: #a8dff0;
+}
+
+/* Notes Textarea */
+.noteslabel textarea {
+  width: 100%;
+  min-height: 220px;
+  box-sizing: border-box;
+  padding: 12px;
+  background-color: #111111;
+  color: #e8f0ed;
+  border: 1px solid #354740;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.6;
+  resize: vertical;
+  outline: none;
+}
+
+.noteslabel textarea:focus {
+  border-color: #a8dff0;
+}
+
+/* Buttons Wrapper */
+.buttonContainer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Common Button Styles */
+.updatebtn,
+.Summarybtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+/* Remove Default Paragraph Margin */
+.updatebtn p,
+.Summarybtn p {
+  margin: 0;
+}
+
+/* Update Button */
+.updatebtn {
+  background-color: #b7f7c5;
+  color: #101714;
+  border: 1px solid #b7f7c5;
+}
+
+.updatebtn:hover {
+  background-color: #a0eab2;
+}
+
+/* AI Summary Button */
+.Summarybtn {
+  background-color: #111111;
+  color: #a8dff0;
+  border: 1px solid #354740;
+}
+
+.Summarybtn:hover {
+  background-color: #1c2b25;
+  border-color: #b7f7c5;
+}
+
+
+/* Mobile */
+@media (max-width: 600px) {
+  .newcontainer {
+    padding: 10px 4% 20px;
+  }
+
+  .backArrow {
+    margin-bottom: 12px;
+  }
+
+  .chapterForm {
+    gap: 16px;
+  }
+
+  .chapterlabel,
+  .noteslabel {
+    font-size: 14px;
+  }
+
+  .chapterlabel input {
+    padding: 11px;
+    font-size: 14px;
+  }
+
+  .noteslabel textarea {
+    min-height: 180px;
+    font-size: 14px;
+  }
+
+  .buttonContainer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .updatebtn,
+  .Summarybtn {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+  }
+}
+
+/* Tablet */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .newcontainer {
+    padding: 16px 5% 25px;
+  }
+
+  .chapterForm {
+    gap: 18px;
+  }
+
+  .noteslabel textarea {
+    min-height: 240px;
+  }
+
+  .buttonContainer {
+    gap: 12px;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+  .newcontainer {
+    padding: 20px 8% 30px;
+  }
+
+  .chapterForm {
+    max-width: 1000px;
+    gap: 22px;
+  }
+
+  .noteslabel textarea {
+    min-height: 300px;
+  }
+
+  .buttonContainer {
+    flex-direction: row;
+  }
+}

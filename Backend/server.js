@@ -13,6 +13,7 @@ const sendChapter= require("./controller/sendChapterDetail")
 const logOut= require("./controller/logOut")
 const sendSubDetails= require("./controller/sendSubjectDetail")
 const deleteNote= require("./controller/deleteNote")
+const updateNote= require("./controller/updateNote")
 //-------------------------------------------//
 
  dotenv.config()
@@ -36,6 +37,7 @@ app.get("/user/subDeatial", midd, sendSubDetails)
 app.get("/user/chapter", midd,sendChapter)
 app.post("/user/logout", logOut)
 app.delete("/user/delete",midd, deleteNote)
+app.put("/user/update",midd, updateNote)
 
 //---------------------------------------//
 

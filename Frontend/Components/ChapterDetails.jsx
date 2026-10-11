@@ -1,28 +1,67 @@
-import { useContext } from "react";
+import { useContext , useState } from "react";
 import { proContext } from "../Provider/Provider";
+import {SavePlus, ArrowLeft,Summary} from "lucide-react"
 import styles from "../Css_folder/ChapterDetail.module.css"
 import { ClipLoader } from "react-spinners";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+
 function ChapterDetail(){
-    const {chapter ,  spin}=useContext(proContext)
+    const {chapter ,  spin ,  getChapterDetails,updateNote , backToSubject}=useContext(proContext)
+////------- SETTING CONDITION ON UPDATE BUTTON-------------//
+const [on ,  setOn]=useState(false)
+//--------------------------------------------------------//
+const { id } = useParams();
+
+
+ useEffect(() => {
+  if (id) {
+    getChapterDetails(id);
+  }
+}, [id])
 
     return(
         <>
-           <div className={styles.container}>
+           <div className={styles.newcontainer}>
+             <div className={styles.backArrow}>
+          <ArrowLeft strokeWidth={1.75}  onClick={backToSubject}/>
+        </div>
              {spin==="enable"? <ClipLoader /> : (<>
                <div className={styles.chapterContainer}>
-                {chapter.map((e)=>{
-                    return <div key={e._id}>
-                       <div>
-                         <input type="text" value={e.chapter} ></input>
-                         <button>edit</button>
-                       </div>
-                       
-                      <div>
-                         <textarea type="text" value={e.notes}></textarea>
-                         <button>edit</button>
-                      </div>
+              
+                      <div >
+                         <form className={styles.chapterForm} onSubmit={(e)=>{
+                          e.preventDefault(),
+                          updateNote()
+                          setOn(false)
+                         }}>
+                          <label className={styles.chapterlabel}>
+                            <p>Chpater</p>
+                              <input type="text" 
+                              value={chapter?.chapter}
+                              onChange={(e)=>{chapter.chapter=e.target.value,  setOn(true)}} 
+                              ></input>
+                          </label>
+
+                          <label className={styles.noteslabel}>
+                            <p>Notes</p>
+                            <textarea type="text" value={chapter?.notes}  
+                             onChange={(e)=>{chapter.notes=e.target.value,  setOn(true)}}
+                            ></textarea>
+                          </label>
+                          <div className={styles.buttonContainer} >
+                            <button className={styles.updatebtn} disabled={!on}  style={{ backgroundColor: on? "#4ADE80" : "#A7B3AD", borderColor: on? "#4ADE80" : "#A7B3AD"}} >
+                              <SavePlus strokeWidth={1.75} />
+                              <p>Update</p>
+                            </button>
+
+                            <button className={styles.Summarybtn}> 
+                             <Summary strokeWidth={1.75} />
+                              <p>Sumarized your notes</p>
+                            </button>
+                          </div>
+                         </form>
                     </div>
-                })}
                </div>
              </>)}
 

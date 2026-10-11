@@ -9,7 +9,7 @@ import ChapterDetail from '../Components/ChapterDetails';
 
  
 function App(){
-const {createAccountStatus }=useContext(proContext)
+
    
   return(
     <>
@@ -18,7 +18,7 @@ const {createAccountStatus }=useContext(proContext)
         <Route path='/home' element={<Home /> }/>
         <Route path='/wentwrong' element={<SomethingWentWrong /> }/>
         <Route path="/subjectdetail" element={<SubjectDetails /> }/>
-        <Route path="/chapterdetail" element={<ChapterDetail /> }/>
+        <Route path="/chapterdetail/:id" element={<ChapterDetail /> }/>
       
       </Routes>
     </>
