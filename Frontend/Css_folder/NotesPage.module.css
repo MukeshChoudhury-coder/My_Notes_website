@@ -70,12 +70,18 @@
     grid-template-columns: repeat(3, 1fr);
      justify-content: center;
     padding: 10px 20px;
-
+  
     overflow-y: auto;
     overflow-x: hidden;
 }
 .notescontainer::-webkit-scrollbar {
     display: none;
+}
+.submessagediv{
+    display: flex;
+    justify-content: center;
+    color: #F5F7F6;
+    font-family: sans-serif;
 }
 
 .notes {

@@ -1,22 +1,22 @@
-const userDB = require ("../Schema/userschema")
-const jwt= require("jsonwebtoken")
-const  bcrypt = require ("bcrypt")
+import userDB from  "../Schema/userschema.js"
+import jwt from "jsonwebtoken"
+import  bcrypt from "bcrypt"
 
 const userSignUp=async(req, res)=>{
-  const {name,email}=req.body
-   const password=   await bcrypt.hash(req.body.password, 10)
    try{
+       const {name,email}=req.body
+        const password=   await bcrypt.hash(req.body.password, 10)
          const checkEmail= await userDB.findOne({email})
          if(checkEmail){
-            res.status(409).json({message:"Email already exists"})
+          return   res.status(409).json({message:"Email already exists"})
          }else{
             const data= await userDB.create({name,email, password});
              const token= jwt.sign({userId:data.id}, process.env.JWT_SECRET, {expiresIn:"1h"})
             res.cookie("accessToken",token,{httpOnly:true } )
-            res.status(201).json({message:"Account created successfully"})
+           return  res.status(201).json({message:"Account created successfully"})
          }
    }catch{
-    res.status(501).json({message:"Something went wrong"})
+   return  res.status(501).json({message:"Something went wrong, please try again later"})
    }
 }
-module.exports= userSignUp
+export default  userSignUp

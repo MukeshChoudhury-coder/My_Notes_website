@@ -1,4 +1,4 @@
-const userDB= require("../Schema/userschema")
+import  userDB from "../Schema/userschema.js"
 
 const homePage=async( req, res)=>{
 const id= req.use.userId
@@ -10,4 +10,4 @@ try{
     res.stauts(501).json({message:"Something went wrong!"})
 }
 }
-module.exports=homePage
+export default homePage

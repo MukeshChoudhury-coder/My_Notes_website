@@ -1,4 +1,4 @@
-const notesDB = require("../Schema/notesschema")
+import  notesDB  from "../Schema/notesschema.js"
 
 async function sendSubDetails(req, res){
  const userSubject= req.query.sub
@@ -12,4 +12,4 @@ async function sendSubDetails(req, res){
  }
 }
 
-module.exports= sendSubDetails
+export default sendSubDetails

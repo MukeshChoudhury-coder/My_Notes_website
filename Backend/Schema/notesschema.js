@@ -1,4 +1,4 @@
-const  mongoose = require("mongoose")
+import   mongoose from "mongoose"
 
 const notesSchema= new mongoose.Schema({
     usersID:{
@@ -20,7 +20,7 @@ const notesSchema= new mongoose.Schema({
 })
 
 const notesDB = mongoose.model("UsresNote", notesSchema)
-module.exports = notesDB
+export default  notesDB
 
 
 /**

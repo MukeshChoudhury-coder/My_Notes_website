@@ -38,14 +38,14 @@ const { id } = useParams();
                           <label className={styles.chapterlabel}>
                             <p>Chpater</p>
                               <input type="text" 
-                              value={chapter?.chapter}
+                              value={chapter.chapter}
                               onChange={(e)=>{chapter.chapter=e.target.value,  setOn(true)}} 
                               ></input>
                           </label>
 
                           <label className={styles.noteslabel}>
                             <p>Notes</p>
-                            <textarea type="text" value={chapter?.notes}  
+                            <textarea type="text" value={chapter.notes}  
                              onChange={(e)=>{chapter.notes=e.target.value,  setOn(true)}}
                             ></textarea>
                           </label>

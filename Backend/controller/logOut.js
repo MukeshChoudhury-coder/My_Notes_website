@@ -13,4 +13,4 @@ try{
 
 }
 
-module.exports=logOut
+export default logOut

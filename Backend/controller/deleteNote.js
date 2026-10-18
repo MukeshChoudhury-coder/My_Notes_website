@@ -1,4 +1,4 @@
-const notesDB = require("../Schema/notesschema")
+import  notesDB  from "../Schema/notesschema.js"
 
 async function deleteNote(req, res){
  const noteId= req.query.noteId
@@ -15,4 +15,4 @@ async function deleteNote(req, res){
        res.status(501).json({message:"something went wrong"})
  }
 }
- module.exports = deleteNote
+ export default deleteNote

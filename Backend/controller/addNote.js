@@ -1,4 +1,4 @@
-const notesDB =  require("../Schema/notesschema")
+import  notesDB from "../Schema/notesschema.js"
 
 const addNote= async(req, res)=>{
 const usersID= req.use.userId
@@ -15,4 +15,4 @@ try{
 
 }
 
-module.exports= addNote
+export default  addNote

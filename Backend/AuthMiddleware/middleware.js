@@ -1,4 +1,5 @@
-const jwt= require("jsonwebtoken")
+import  jwt from "jsonwebtoken"
+
 const middleware=(req,res,next)=>{
 const getJwt= req.cookies.accessToken
 
@@ -15,4 +16,4 @@ return res.status(401).json({message:"Invalid Token"})
 }
 }
 
-module.exports=middleware
+export default middleware

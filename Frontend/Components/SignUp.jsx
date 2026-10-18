@@ -20,11 +20,6 @@ function SignUp(){
                 <form onSubmit={(e)=>{
                    e.preventDefault()
                     createUserAccount()
-                    setCreateAccount({
-                      name:"",
-                       email:"",
-                       password:""  
-                    })
                 }}>
                   <label>
                     <p className={styles.lablePara}>Full name</p>

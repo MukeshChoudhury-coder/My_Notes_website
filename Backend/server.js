@@ -1,19 +1,19 @@
-const express= require ("express")
-const   dotenv = require ("dotenv")
-const cors=require("cors")
-const cookieParser = require("cookie-parser");
-const  connectDB= require("./Database/db")
-const userSignUp=require("./controller/Signup")
-const midd=require("./AuthMiddleware/middleware")
-const homePage=require("./controller/getHome")
-const login=require("./controller/login")
-const addNote= require("./controller/addNote")
-const sendSubjectName= require("./controller/sendSubjectName")
-const sendChapter= require("./controller/sendChapterDetail")
-const logOut= require("./controller/logOut")
-const sendSubDetails= require("./controller/sendSubjectDetail")
-const deleteNote= require("./controller/deleteNote")
-const updateNote= require("./controller/updateNote")
+import express  from "express"
+import   dotenv from "dotenv"
+import cors from "cors"
+import cookieParser from "cookie-parser";
+import  connectDB from "./Database/db.js"
+import userSignUp from "./controller/Signup.js"
+import midd from "./AuthMiddleware/middleware.js"
+import homePage from "./controller/getHome.js"
+import login from "./controller/login.js"
+import addNote from "./controller/addNote.js"
+import sendSubjectName from"./controller/sendSubjectName.js"
+import sendChapter from"./controller/sendChapterDetail.js"
+import logOut from "./controller/logOut.js"
+import sendSubDetails from "./controller/sendSubjectDetail.js"
+import deleteNote from "./controller/deleteNote.js"
+import updateNote from"./controller/updateNote.js"
 //-------------------------------------------//
 
  dotenv.config()

@@ -1,4 +1,4 @@
-const notesDB = require("../Schema/notesschema")
+import  notesDB from "../Schema/notesschema.js"
 
 async function sendChapter(req, res){
     const chapId= req.query.ID
@@ -9,4 +9,4 @@ async function sendChapter(req, res){
         res.status(501).json({message:"something went wrong"})
     }
 }
-module.exports = sendChapter
+export default  sendChapter

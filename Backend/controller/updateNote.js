@@ -1,4 +1,4 @@
-const notesDB= require("../Schema/notesschema")
+import  notesDB from "../Schema/notesschema.js"
 
 async function updateNote(req, res){
  const notes= req.body
@@ -28,4 +28,4 @@ if (updateNote.modifiedCount === 0) {
     console.log(err)
  }
 }
-module.exports=updateNote
+export default updateNote

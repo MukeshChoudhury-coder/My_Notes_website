@@ -1,4 +1,4 @@
-const notesDB = require('../Schema/notesschema')
+import  notesDB from '../Schema/notesschema.js'
 
 const  sendSubjectName=async(req, res)=>{
 const userid= req.use.userId
@@ -7,7 +7,7 @@ try{
 const notes= await notesDB.find({ usersID:userid})
 
 if(notes.length===0){
-    res.status(400).json([])
+   return  res.status(200).json([])
 }else{
    let subName={}
 
@@ -23,15 +23,15 @@ if(notes.length===0){
     let name= Object.keys(subName).map((e)=>{
         return {subject:e}
     })
-   res.status(200).json(name)
+  return  res.status(200).json(name)
 }
 }catch{
-    res.status(400).json({message:"something wenty wrong"})
+   return res.status(501).json({message:"something went wrong, please try again"})
 }
 }
 
 
-module.exports = sendSubjectName
+export default  sendSubjectName
 
 
 /**

@@ -3,7 +3,7 @@ import { proContext } from '../Provider/Provider';
 import styles from '../Css_folder/NotesPage.module.css'
 import {Search , Funnel, ChevronDown , ArrowDownAZ ,MoveRight} from 'lucide-react'
 function NotesPage(){
-    const {subjectName , userData , getSubjectDeatils}=useContext(proContext)
+    const {subjectName , userData , getSubjectDeatils, subMessage}=useContext(proContext)
         return(
         <>
         <div className={styles.container} >
@@ -19,7 +19,7 @@ function NotesPage(){
                 </div>
 
                 <div className={styles.notescontainer}>
-                    {subjectName.length===0? <p>Empty</p>: (<>
+                    {subjectName.length===0?<p className={styles.submessagediv}>{subMessage}</p>: (<>
                       {subjectName.map((e,index)=>{
                         return <div className={styles.notes} key={index} onClick={()=>getSubjectDeatils(e.subject)}>
                             <p className={styles.title}>{e.subject}</p>

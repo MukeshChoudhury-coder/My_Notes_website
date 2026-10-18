@@ -46,29 +46,33 @@ const [manubar ,  setManuBra]=useState("hidden")
 
 
            const data= await res.json()
-            setMessage(data.message)
+           
         
            if(res.ok){
            await getHomePage();
            await getSubjectName()
              navigate("/home");
            setSpin("disable")
-           }else if(!res.ok){
-            if (res.status === 501) {
-                   navigate("/wentwrong");
-                   }
            }
            
-           if(res.status!==201){
+           if(res.status===409){
+              setMessage(data.message)
+              setSpin("disable")
+           }
+           
+           if(res.status>=500){
+             setMessage(data.message)
             setSpin("disable")
            }
             
         }catch(err){
           console.log(err)
+        }finally{
+            setSpin("disable") 
         }
          setTimeout(()=>{
             setMessage("")
-         },1000)
+         },3000)
     }
    
 //----------------------- XXXXXXXXX-----------------//
@@ -91,7 +95,7 @@ async function getHomePage(){
                    }
            }
     }catch(err){
-        console.log(err.message)
+        console.log(err)
     }
 }
 
@@ -116,27 +120,31 @@ setSpin("enable")
         })
 
          const data= await res.json()
-            setMessage(data.message)
+          
         if(res.ok){
              await getHomePage();
              await getSubjectName()
                navigate("/home");
              setSpin("disable")
-        }else if(!res.ok){
-            if (res.status === 501) {
-                   navigate("/wentwrong");
-                   }
-           }
-
-        if(res.status!==201){
-           setSpin("disable") 
+        }else if ( res.status===400){
+            setMessage(data.message)
+              setSpin("disable") 
         }
+        if (res.status >= 501) {
+                   setMessage("Server error. Please try again later.");
+          }
+           
     }catch(err){
         console.log(err)
+          setMessage(
+            "Unable to connect. Please check your connection and try again."
+        );
+    }finally{
+        setSpin("disable") 
     }
      setTimeout(()=>{
             setMessage("")
-         },1000)
+         },3000)
 }
 //----------XXXXXXXXX--------------------//
 
@@ -171,6 +179,7 @@ setSpin("enable")
 
       //---------GETNOTE FROM BACKEND---------------------//
       const [subjectName , setSubjectName]=useState([])
+      const [subMessage ,  setSubMessage]=useState()
       const  getSubjectName= async()=>{
         try{
             const res= await fetch("http://localhost:3001/user/getnote",{
@@ -178,9 +187,19 @@ setSpin("enable")
                 credentials:'include'
             })
 
-            if(res.ok){
-                const data= await res.json()
-                setSubjectName(data)
+              const data= await res.json()
+            if(res.status===200){
+              setSubjectName(data)
+
+              if(data.length===0){
+              setSubMessage("Please create your notes!") 
+              }
+            }
+            if(res.status===400){
+                setSubMessage(data.message)
+            }
+            if(res.status>=500){
+                setSubMessage(data.message)
             }
 
         }catch(err){
@@ -190,7 +209,7 @@ setSpin("enable")
  
     useEffect(()=>{
         getSubjectName()
-     },[getSubjectName]) 
+     },[]) 
    
 
     //-----------GET SUBJECTS DETAIL -------------//
@@ -335,7 +354,7 @@ setSpin("enable")
       userLogin , setUserLogin,login , homeNotes, setHomeNotes,
       //--------------CREATE NOTES LOGIN STARTS HERE-------//
       //---------1. ADD NOTES LOGIC----------//
-      userNote ,  setUserNote , notesData ,subjectName,
+      userNote ,  setUserNote , notesData ,subjectName,subMessage,
       //-----------get seubect detail---------//
       getSubjectDeatils,Notes,
       //----------logout variables----------//
