@@ -1,12 +1,13 @@
 import  notesDB  from "../Schema/notesschema.js"
 
 async function sendSubDetails(req, res){
- const userSubject= req.query.sub
- 
  try{
-    const subjects= await notesDB.find({subject:userSubject})
+   const userSubject= req.query.sub
+   const userId= req.use.userId
+    const subjects= await notesDB.find({usersID:userId, subject:userSubject})
     
  res.status(200).json(subjects)
+     console.log(subjects)
  }catch(err){
     console.log(err)
  }

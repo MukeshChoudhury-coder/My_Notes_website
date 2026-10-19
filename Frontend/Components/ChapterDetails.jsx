@@ -5,11 +5,10 @@ import styles from "../Css_folder/ChapterDetail.module.css"
 import { ClipLoader } from "react-spinners";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-
 function ChapterDetail(){
-    const {chapter ,  spin ,  getChapterDetails,updateNote , backToSubject}=useContext(proContext)
+    const {chapter ,setChapter ,  spin ,  getChapterDetails,updateNote , backToSubject,message,  messagePopup}=useContext(proContext)
 ////------- SETTING CONDITION ON UPDATE BUTTON-------------//
-const [on ,  setOn]=useState(false)
+const [on ,  setOn ]=useState(false)
 //--------------------------------------------------------//
 const { id } = useParams();
 
@@ -22,6 +21,14 @@ const { id } = useParams();
 
     return(
         <>
+           <div className={styles.popupmessage}>
+                       <p className={styles.popupmessagep}
+                        style={{
+                          display: messagePopup==="true" ?  "block": "none",
+                        }}
+                       >{message}</p>
+                      </div>
+
            <div className={styles.newcontainer}>
              <div className={styles.backArrow}>
           <ArrowLeft strokeWidth={1.75}  onClick={backToSubject}/>
@@ -39,14 +46,14 @@ const { id } = useParams();
                             <p>Chpater</p>
                               <input type="text" 
                               value={chapter.chapter}
-                              onChange={(e)=>{chapter.chapter=e.target.value,  setOn(true)}} 
+                              onChange={(e)=>{setChapter(prev=>({...prev, chapter: e.target.value})),  setOn(true)}} 
                               ></input>
                           </label>
 
                           <label className={styles.noteslabel}>
                             <p>Notes</p>
                             <textarea type="text" value={chapter.notes}  
-                             onChange={(e)=>{chapter.notes=e.target.value,  setOn(true)}}
+                             onChange={(e)=>{setChapter(prev=>({...prev, notes: e.target.value})),setOn(true)}}
                             ></textarea>
                           </label>
                           <div className={styles.buttonContainer} >

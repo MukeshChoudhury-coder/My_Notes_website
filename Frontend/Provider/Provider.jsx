@@ -13,6 +13,7 @@ const [homeNotes, setHomeNotes]=useState("create")
 const [spin , setSpin]=useState("")
 //------------MESSAGE----------------------------//
 const [message, setMessage]=useState("")
+const [messagePopup, setMessagePopup]=useState("false")
 //------xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx------//
 //-----------MANU BAR HIDE-UNHIDE BUTTON FUNCTIONALITY---//
 const [manubar ,  setManuBra]=useState("hidden")
@@ -165,16 +166,22 @@ setSpin("enable")
 
             if(res.ok){
                 const data= await res.json()
-                console.log(res.status)
-            }else if(!res.ok){
-            if (res.status === 501) {
-                   navigate("/wentwrong");
+                setMessage(data.message)
+                setMessagePopup("true")
+            }
+            if (res.status >= 500) {
+                  setMessage(data.message)
+                   setMessagePopup("true")
                    }
-           }
+      
 
         }catch(err){
             console.log(err)
         }
+
+        setTimeout(()=>{
+          setMessagePopup("false")
+        }, 3000)
       }
 
       //---------GETNOTE FROM BACKEND---------------------//
@@ -237,10 +244,10 @@ setSpin("enable")
       }catch(err){
         console.log(err)
       }
-    },[])
+    },[Notes])
 
     //----------- CHAPTER DETAIL------------//
-    const [chapter , setChapter]=useState({})
+    const [chapter , setChapter]=useState({chapter: "", notes: ""})
     const getChapterDetails = async (Id) => {
        setSpin("enable");
 
@@ -258,8 +265,10 @@ setSpin("enable")
     if (!res.ok) {
       throw new Error(data.message || "Failed to fetch chapter");
     }
+
+         setChapter(data);
     
-    setChapter(data);
+   
   } catch (err) {
     console.log(err);
   } finally {
@@ -276,13 +285,22 @@ setSpin("enable")
                 credentials:'include',
                 body:JSON.stringify(chapter)
              })
+               const data= await res.json()
              if(res.ok){
-                const data= await res.json()
-                console.log(data)
+                setMessage(data.message)
+                setMessagePopup("true")
+             }
+             if(res.status>=500){
+                setMessage(data.message)
+                 setMessagePopup("true")
              }
         }catch(err){
             console.log(err)
         }
+
+        setTimeout(()=>{
+             setMessagePopup("false")
+        },3000)
      }
 
      useCallback(()=>{
@@ -319,27 +337,48 @@ setSpin("enable")
      },[])
 
      //-------------DELETE NOTE LOGIC-------------//
+     
      const deleteNote= useCallback(async(id)=>{
-    
+  
         try{
             const res= await fetch(`http://localhost:3001/user/delete/?noteId=${id}`, {
                 method:"DELETE",
                 credentials:"include"
             })
-
+ const data= await res.json()
             if( res.ok){
-                const data= await res.json()
-                console.log(data.message)
-
+               
+                setMessage(data.message)
+                 // popup setting//
+                 setMessagePopup("true")
             // UI se note remove
+            const deletedNotes= Notes.filter((e)=>{
+                return e._id!==id
+            })
+
+            localStorage.setItem("subjectName", JSON.stringify(deletedNotes))
             setGetNote((oldNotes) =>
                 oldNotes.filter((note) => note._id !== id)
             );
+             
             }
+            if(res.status>=500){
+                setMessage(data.message)
+                 // popup setting//
+                 setMessagePopup("true")
+            }
+
+        // popup setting//
+               setTimeout(()=>{
+                 setMessagePopup('false')
+               },3000)
+            
+              
         }catch(err){
             console.log(err)
         }
-     },[])
+        
+     },[Notes])
 
     return(
         <>
@@ -350,6 +389,7 @@ setSpin("enable")
             manubar ,  setManuBra,spin,
             //----- all the  signup variebles and functions---------------// 
             setSigninLogin, signinLogin ,setCreateAccount , createAccount , createUserAccount,userData,message,
+            messagePopup,
      //----- all the  Login variebles and functions---------------//
       userLogin , setUserLogin,login , homeNotes, setHomeNotes,
       //--------------CREATE NOTES LOGIN STARTS HERE-------//
@@ -362,7 +402,7 @@ setSpin("enable")
       //-----------delete note variable--------//
       deleteNote,
       //--------chapter detail --------//
-      getChapterDetails,chapter,updateNote
+      getChapterDetails,chapter,setChapter,updateNote
         }}>
             {children}
         </proContext.Provider>

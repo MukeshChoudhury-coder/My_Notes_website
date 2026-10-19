@@ -5,12 +5,19 @@ import {ClipLoader } from "react-spinners";
 import {useContext} from 'react'
 import { proContext } from '../Provider/Provider';
 function SubjectDetails(){
-    const {Notes, spin , deleteNote, backNavigation, getChapterDetails,navigate}=useContext(proContext)
+    const {Notes, spin , deleteNote, backNavigation, getChapterDetails,navigate, message , messagePopup}=useContext(proContext)
     return (
         <>
       <div className={styles.container}>
         <Navbar />
 
+           <div className={styles.popupmessage}>
+            <p className={styles.popupmessagep}
+             style={{
+               display: messagePopup==="true" ?  "block": "none",
+             }}
+            >{message}</p>
+           </div>
         <div className={styles.container2}>
             <div className={styles.gobackicon} onClick={()=>backNavigation()} >
              <ArrowLeft color="#F5F7F6" />

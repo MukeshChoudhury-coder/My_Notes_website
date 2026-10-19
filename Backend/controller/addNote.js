@@ -7,10 +7,10 @@ const {subject , chapter, notes}= req.body
 try{
   const addNote= await notesDB.create({usersID , subject , chapter, notes})
        
-        res.status(200).json({message:"note added"})
+      return  res.status(200).json({message:"note added"})
        console.log(addNote)
 }catch{
-    res.status(401).json({message:"something went wrong"})
+    res.status(501).json({message:"something went wrong"})
 }
 
 }
