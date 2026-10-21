@@ -1,7 +1,6 @@
 import {Routes, Route } from 'react-router-dom';
 import Registration from '../Components/Registration';
 import Home from '../Components/Home';
-import SomethingWentWrong from '../Components/SomethingWentWrong';
 import SubjectDetails from '../Components/SubjectDetails';
 import ChapterDetail from '../Components/ChapterDetails';
  import { useContext } from 'react';
