@@ -21,12 +21,12 @@ const { id } = useParams();
 
     return(
         <>
-           <div className={styles.popupmessage}>
-                       <p className={styles.popupmessagep}
-                        style={{
+           <div className={styles.popupmessage}
+            style={{
                           display: messagePopup==="true" ?  "block": "none",
                         }}
-                       >{message}</p>
+           >
+                       <p className={styles.popupmessagep}>{message}</p>
                       </div>
 
            <div className={styles.newcontainer}>

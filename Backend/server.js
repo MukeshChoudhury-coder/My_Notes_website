@@ -14,6 +14,7 @@ import logOut from "./controller/logOut.js"
 import sendSubDetails from "./controller/sendSubjectDetail.js"
 import deleteNote from "./controller/deleteNote.js"
 import updateNote from"./controller/updateNote.js"
+import sendSearch from"./controller/SearchData.js"
 //-------------------------------------------//
 
  dotenv.config()
@@ -38,6 +39,7 @@ app.get("/user/chapter", midd,sendChapter)
 app.post("/user/logout", logOut)
 app.delete("/user/delete",midd, deleteNote)
 app.put("/user/update",midd, updateNote)
+app.get("/user/search",midd, sendSearch)
 
 //---------------------------------------//
 

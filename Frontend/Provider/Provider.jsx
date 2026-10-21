@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import  { createContext, useState , useCallback }  from "react";
 import { useEffect } from "react";
 
-
  export const proContext= createContext()
 
 function Provider({children}){
@@ -38,7 +37,7 @@ const [manubar ,  setManuBra]=useState("hidden")
     async function createUserAccount(){
          setSpin("enable")
         try{
-            const res= await fetch(`http://localhost:3001/user/signup`,{
+            const res= await fetch(`${import.meta.env.VITE_API_URL}/user/signup`,{
                 method:"POST",
                 credentials: "include",
                 headers:{"Content-Type" : "application/json" },
@@ -54,16 +53,19 @@ const [manubar ,  setManuBra]=useState("hidden")
            await getSubjectName()
              navigate("/home");
            setSpin("disable")
+           setMessagePopup("true")
            }
            
            if(res.status===409){
               setMessage(data.message)
               setSpin("disable")
+              setMessagePopup("true")
            }
            
            if(res.status>=500){
              setMessage(data.message)
             setSpin("disable")
+            setMessagePopup("true")
            }
             
         }catch(err){
@@ -72,7 +74,7 @@ const [manubar ,  setManuBra]=useState("hidden")
             setSpin("disable") 
         }
          setTimeout(()=>{
-            setMessage("")
+           setMessagePopup("false")
          },3000)
     }
    
@@ -81,7 +83,7 @@ const [manubar ,  setManuBra]=useState("hidden")
   const [userData , setUserData]=useState({})
 async function getHomePage(){
     try{
-        const res= await fetch(`http://localhost:3001/user/home`,{
+        const res= await fetch(`${import.meta.env.VITE_API_URL}/user/home`,{
             method:"GET",
             credentials:"include",
         })
@@ -113,7 +115,7 @@ const login= async()=>{
 setSpin("enable")
     try{
          
-        const res= await fetch(`http://localhost:3001/user/login`,{
+        const res= await fetch(`${import.meta.env.VITE_API_URL}/user/login`,{
             method:"POST",
             credentials:"include",
             headers:{"Content-Type": "application/json"},
@@ -127,12 +129,15 @@ setSpin("enable")
              await getSubjectName()
                navigate("/home");
              setSpin("disable")
+              setMessagePopup("true")
         }else if ( res.status===400){
             setMessage(data.message)
               setSpin("disable") 
+               setMessagePopup("true")
         }
         if (res.status >= 501) {
                    setMessage("Server error. Please try again later.");
+                    setMessagePopup("true")
           }
            
     }catch(err){
@@ -144,7 +149,7 @@ setSpin("enable")
         setSpin("disable") 
     }
      setTimeout(()=>{
-            setMessage("")
+            setMessagePopup("false")
          },3000)
 }
 //----------XXXXXXXXX--------------------//
@@ -157,7 +162,7 @@ setSpin("enable")
       const notesData= async()=>{
     
         try{
-            const res= await fetch(`http://localhost:3001/user/notes`,{
+            const res= await fetch(`${import.meta.env.VITE_API_URL}/user/notes`,{
                 method:"POST",
                 credentials:"include",
                 headers:{"Content-Type" : "application/json"},
@@ -189,7 +194,7 @@ setSpin("enable")
       const [subMessage ,  setSubMessage]=useState()
       const  getSubjectName= async()=>{
         try{
-            const res= await fetch("http://localhost:3001/user/getnote",{
+            const res= await fetch(`${import.meta.env.VITE_API_URL}/user/getnote`,{
                 method:"GET",
                 credentials:'include'
             })
@@ -228,7 +233,7 @@ setSpin("enable")
     const getSubjectDeatils=useCallback(async (val)=>{
           setSpin("enable")
       try{
-        const res = await fetch(`http://localhost:3001/user/subDeatial/?sub=${val}`,{method:"GET" , credentials:'include'})
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/user/subDeatial/?sub=${val}`,{method:"GET" , credentials:'include'})
 
         if(res.ok){
             const data= await res.json()
@@ -253,7 +258,7 @@ setSpin("enable")
 
       try {
         const res = await fetch(
-      `http://localhost:3001/user/chapter/?ID=${Id}`,
+      `${import.meta.env.VITE_API_URL}/user/chapter/?ID=${Id}`,
       {
         method: "GET",
         credentials: "include",
@@ -279,7 +284,7 @@ setSpin("enable")
      //------------UPDATE NOTES-----------------//
      const updateNote=async()=>{
         try{
-             const res= await fetch(`http://localhost:3001/user/update`,{
+             const res= await fetch(`${import.meta.env.VITE_API_URL}/user/update`,{
                 method:"PUT",
                 headers:{"Content-Type": "application/json"},
                 credentials:'include',
@@ -310,7 +315,7 @@ setSpin("enable")
      const logOutUser=useCallback(async()=>{
                setSpin("enable")
                try{
-                 const res= await fetch(`http://localhost:3001/user/logout`,{
+                 const res= await fetch(`${import.meta.env.VITE_API_URL}/user/logout`,{
                     method:"POST",
                     credentials:"include"
                  })  
@@ -341,7 +346,7 @@ setSpin("enable")
      const deleteNote= useCallback(async(id)=>{
   
         try{
-            const res= await fetch(`http://localhost:3001/user/delete/?noteId=${id}`, {
+            const res= await fetch(`${import.meta.env.VITE_API_URL}/user/delete/?noteId=${id}`, {
                 method:"DELETE",
                 credentials:"include"
             })
@@ -379,6 +384,35 @@ setSpin("enable")
         }
         
      },[Notes])
+     //-----SEARCH LOGIC---------//
+     const [search ,  setSearch]=useState()
+     const getSearch=async()=>{
+      setSpin("enable")
+          Notes, setGetNote
+      try{
+         const res= await fetch(`${import.meta.env.VITE_API_URL}/user/search/?data=${search}`,{
+          method:"GET",
+          credentials:'include'
+         })
+
+          const data= await res.json()
+         if(res.ok){
+            setSpin("disable")
+       setGetNote(data)
+         }
+         if(res.status===409){
+           setSpin("disable")
+           setMessage(data.message)
+         }
+         if(res.status>=500){
+             setSpin("disable")
+           setMessage(data.message)
+         }
+
+      }catch(err){
+        console.log(err)
+      }
+     }
 
     return(
         <>
@@ -393,6 +427,8 @@ setSpin("enable")
      //----- all the  Login variebles and functions---------------//
       userLogin , setUserLogin,login , homeNotes, setHomeNotes,
       //--------------CREATE NOTES LOGIN STARTS HERE-------//
+      //-------update note variable----/
+      updateNote,
       //---------1. ADD NOTES LOGIC----------//
       userNote ,  setUserNote , notesData ,subjectName,subMessage,
       //-----------get seubect detail---------//
@@ -402,7 +438,9 @@ setSpin("enable")
       //-----------delete note variable--------//
       deleteNote,
       //--------chapter detail --------//
-      getChapterDetails,chapter,setChapter,updateNote
+      getChapterDetails,chapter,setChapter,
+      //---search variable---//
+       getSearch,setSearch, search
         }}>
             {children}
         </proContext.Provider>

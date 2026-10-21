@@ -13,10 +13,6 @@ function NotesPage(){
             </div>
 
             <div className={styles.userNotes}>
-                <div className={styles.notescount}>
-                        <p className={styles.notescountp}> Total Subjects </p>
-                        <p>0</p>
-                </div>
 
                 <div className={styles.notescontainer}>
                     {subjectName.length===0?<p className={styles.submessagediv}>{subMessage}</p>: (<>

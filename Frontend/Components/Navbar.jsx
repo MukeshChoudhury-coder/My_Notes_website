@@ -105,7 +105,7 @@ function Navbar(){
 
             <div className={styles.userInfo}>
              
-               <CircleUserRound color="#22C55E" size={30} strokeWidth={2} />
+               <CircleUserRound color="#22C55E" size={30} strokeWidth={2} className={styles.userlogo} />
                <p className={styles.userName}>{userData.name ? userData.name[0] : ""}</p>
             </div>
          </div>

@@ -4,7 +4,7 @@ import { proContext } from '../Provider/Provider';
 import { useContext } from 'react';
 import { ClipLoader } from "react-spinners";
 function Login(){
-const { setSigninLogin , userLogin , setUserLogin ,login , spin,message } = useContext(proContext);
+const { setSigninLogin , userLogin , setUserLogin ,login , spin,message,messagePopup } = useContext(proContext);
     return(
         <>
         <div className={styles.loginForm}>
@@ -13,9 +13,10 @@ const { setSigninLogin , userLogin , setUserLogin ,login , spin,message } = useC
                 <p className={styles.welcometagline}>Login to continue your account.</p>
             </div>
                 
-                 <div className={styles.message}>
-                                    <p className={styles.messagep} >{message}</p>
-                                  </div>
+                 <div className={styles.popupmessage}
+                                   style={{  visibility: messagePopup==="true" ?  "visible":"hidden",}} >
+                                              <p className={styles.popupmessagep}>{message}</p>
+                                             </div>
             <div className={styles.formdiv}>
                 <form  onSubmit={(e)=>{
                     e.preventDefault()

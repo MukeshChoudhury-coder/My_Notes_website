@@ -34,6 +34,7 @@
       border-right: 3px solid #22C55E;
       border-top-right-radius: 8px ;
       border-bottom-right-radius: 8px ;
+       
       transition: all .9s;
 }
 
@@ -186,4 +187,10 @@ font-size: 12px;
     background-color: #ffcece44;
     border-radius: 8px;
 }
+
+/** Responsiveness**/
+
+/* ==========================
+   TABLET: 768px–1023px
+========================== */
 
