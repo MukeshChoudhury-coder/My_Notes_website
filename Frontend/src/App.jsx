@@ -16,7 +16,6 @@ function App(){
       <Routes>
         <Route path='/' element={<Registration />}/>
         <Route path='/home' element={<Home /> }/>
-        <Route path='/wentwrong' element={<SomethingWentWrong /> }/>
         <Route path="/subjectdetail" element={<SubjectDetails /> }/>
         <Route path="/chapterdetail/:id" element={<ChapterDetail /> }/>
       

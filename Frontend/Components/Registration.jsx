@@ -10,7 +10,7 @@ function Registration(){
         <div className={styles.parent}>
           <div className={styles.logoNotesText}>
             <div className={styles.logoNotes}>
-                <img src="../public/My_Note_Logo.png" alt="logo" className={styles.logo} width="150" height="130"/>
+                <img src="/My_Note_Logo.png" alt="logo" className={styles.logo} width="150" height="130"/>
                 <p className={styles.my}>My <span className={styles.Notes}>Notes</span></p>
             </div>
           </div>

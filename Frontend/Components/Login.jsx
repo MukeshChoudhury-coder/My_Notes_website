@@ -54,7 +54,7 @@ const { setSigninLogin , userLogin , setUserLogin ,login , spin,message,messageP
 
                      <p className={styles.or}>OR</p>
              <button className={styles.googleAccBtn}>
-                    <img src="../public/google_logo.png" width={"50px"} />
+                    <img src="/google_logo.png" width={"50px"} />
                     <p>Continue with Google</p>
                 </button>
 

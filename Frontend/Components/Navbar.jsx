@@ -22,7 +22,7 @@ function Navbar(){
 
             <div className={styles.canclebtn}>
              <div className={styles.logoDiv2}>
-             <img src="../public/My_Note_Logo.png" width={"60px"} alt="Logo" className={styles.logo2} />
+             <img src="/My_Note_Logo.png" width={"60px"} alt="Logo" className={styles.logo2} />
              <p className={styles.my2}>My <span className={styles.Notes2}>Notes</span></p>
            </div>
            <X size={18} strokeWidth={4}  color='white' className={styles.cancel} onClick={()=>setManuBra("hide")}/>
@@ -98,7 +98,7 @@ function Navbar(){
 
 
               <div className={styles.logoDiv}>
-             <img src="../public/My_Note_Logo.png" width={"60px"} alt="Logo" className={styles.logo} />
+             <img src="/My_Note_Logo.png" width={"60px"} alt="Logo" className={styles.logo} />
              <p className={styles.my}>My <span className={styles.Notes}>Notes</span></p>
            </div>
         

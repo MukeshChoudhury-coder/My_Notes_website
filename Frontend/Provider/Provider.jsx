@@ -92,11 +92,7 @@ async function getHomePage(){
             const data= await res.json()
             setUserData(data)
             setCreateAccount(data.message)
-        }else if(!res.ok){
-            if (res.status === 501) {
-                   navigate("/wentwrong");
-                   }
-           }
+        }
     }catch(err){
         console.log(err)
     }
@@ -332,9 +328,6 @@ setSpin("enable")
                     
                     if(res.status!==201){
                         setSpin("disable")
-                         navigate('/wentwrong')
-                    }else if(res.status===404){
-                        navigate('/wentwrong')
                     }
                }catch(err){
                 console.log("error")
