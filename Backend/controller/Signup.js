@@ -12,10 +12,12 @@ const userSignUp=async(req, res)=>{
          }else{
             const data= await userDB.create({name,email, password});
              const token= jwt.sign({userId:data.id}, process.env.JWT_SECRET, {expiresIn:"1h"})
-            res.cookie("accessToken",token,{httpOnly:true } )
+            res.cookie("accessToken",token,{httpOnly:true , secure: true,sameSite: "none",
+  maxAge: 60 * 60 * 1000 } )
            return  res.status(201).json({message:"Account created successfully"})
          }
    }catch{
+        console.error("SIGNUP ERROR:", err);
    return  res.status(501).json({message:"Something went wrong, please try again later"})
    }
 }

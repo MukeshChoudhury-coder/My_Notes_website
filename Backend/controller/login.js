@@ -17,7 +17,8 @@ const login =async(req, res)=>{
 
      if(checkPassword){
         const token= jwt.sign({userId:data.id} , process.env.JWT_SECRET, {expiresIn:"1h"})
-     res.cookie("accessToken", token, {httpOnly:true })
+     res.cookie("accessToken", token, {httpOnly:true , secure: true, sameSite: "none",
+  maxAge: 60 * 60 * 1000 })
     return   res.status(201).json({message:"Login in successfully"})
      }else{
          return  res.status(400).json({message:"Incorrect Password"})
