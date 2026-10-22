@@ -19,14 +19,15 @@ import sendSearch from"./controller/SearchData.js"
 
  dotenv.config()
 const app=express()
-app.use(express.json())
-app.use(cookieParser());
+
 app.use(cors({
     origin:(process.env.Frontent_Port),
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
      credentials: true   
 }))
+app.use(express.json())
+app.use(cookieParser());
  connectDB()
 //----------------ROUTES-----------------//
 app.post("/user/signup",userSignUp)
