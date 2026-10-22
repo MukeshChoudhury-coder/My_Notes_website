@@ -21,7 +21,7 @@ import sendSearch from"./controller/SearchData.js"
 const app=express()
 
 app.use(cors({
-    origin:(process.env.Frontent_Port),
+    origin:(process.env.Frontend_Port),
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
      credentials: true   
