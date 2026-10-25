@@ -3,16 +3,9 @@ import { useContext } from 'react'
 import { proContext } from '../Provider/Provider'
 import { StickyNotePlus , BookOpenText , Pencil , Save , StickyNotes} from "lucide-react"
 function NotesForm(){
-    const {userData, userNote ,  setUserNote ,notesData,messagePopup, message}=useContext(proContext)
+    const {userData, userNote ,  setUserNote ,notesData}=useContext(proContext)
     return(
         <>
-                <div className={styles.popupmessage}>
-                        <p className={styles.popupmessagep}
-                         style={{
-                           display: messagePopup==="true" ?  "block": "none",
-                         }}
-                        >{message}</p>
-                       </div>
 
       <div className={styles.notesformbody} >
          <div className={styles.greetingmessage}>

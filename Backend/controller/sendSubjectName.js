@@ -23,7 +23,12 @@ if(notes.length===0){
     let name= Object.keys(subName).map((e)=>{
         return {subject:e}
     })
+
+    if(!name){
+ return  res.status(200).json([])
+    }else{
   return  res.status(200).json(name)
+  }
 }
 }catch{
    return res.status(501).json({message:"something went wrong, please try again"})

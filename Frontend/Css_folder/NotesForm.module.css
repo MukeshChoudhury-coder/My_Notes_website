@@ -1,22 +1,4 @@
-.popupmessage{
-    width: 80%;
-    height: 100px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    position: absolute;
-    padding: 0 10px;
-    left: 100px;
-}
-.popupmessagep{
-  width: 220px;
-    font-family: sans-serif;
-    font-size: 13px;
-    font-weight: 550;
-    padding: 5px 10px;
-    border-radius: 8px;
-    color: #22C55E;
-}
+
 
 .notesformbody{
     width: 100%; 
@@ -214,4 +196,328 @@ position: relative;
     font-size: 16px;
     font-weight: 500;
     cursor: pointer;
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .notesformbody {
+    padding: 20px 12px;
+  }
+
+  .greetingmessage {
+    margin-bottom: 20px;
+  }
+
+  .greethello {
+    font-size: 24px;
+  }
+
+  .greetmessage {
+    font-size: 14px;
+  }
+
+  .formcontainer {
+    width: 100%;
+    padding: 20px 14px;
+    box-sizing: border-box;
+  }
+
+  .createnotecontainer {
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .createnotecontainer svg {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+  }
+
+  .create {
+    font-size: 24px;
+  }
+
+  .createnotesmallmessage {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .noteForm {
+    width: 100%;
+    gap: 22px;
+  }
+
+  .noteLabel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .noteLabeldivs,
+  .noteLabel2,
+  .noteLabeldiv,
+  .noteLabeldiv2 {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .noteLabeltitle,
+  .noteLabelcontent {
+    font-size: 16px;
+  }
+
+  .noteLabeltitletwo {
+    min-height: auto;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .noteLabelinput {
+    width: 100%;
+    min-width: 0;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+
+  .noteLabeldiv2 {
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .noteLabelinput2 {
+    width: 100%;
+    min-width: 0;
+    min-height: 180px;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+
+  .savenotebtn {
+    width: 100%;
+    min-height: 48px;
+    justify-content: center;
+  }
+
+}
+
+/* Tablet*/
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+  .notesformbody {
+    padding: 24px 20px;
+  }
+
+  .greetingmessage {
+    margin-bottom: 24px;
+  }
+
+  .greethello {
+    font-size: 28px;
+  }
+
+  .greetmessage {
+    font-size: 15px;
+  }
+
+  .formcontainer {
+    width: 100%;
+    padding: 26px 22px;
+    box-sizing: border-box;
+  }
+
+  .createnotecontainer {
+    gap: 14px;
+  }
+
+  .createnotecontainer svg {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+  }
+
+  .create {
+    font-size: 28px;
+  }
+
+  .createnotesmallmessage {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .noteForm {
+    width: 100%;
+    gap: 24px;
+  }
+
+  .noteLabel {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .noteLabeldivs,
+  .noteLabel2,
+  .noteLabeldiv,
+  .noteLabeldiv2 {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .noteLabeltitle,
+  .noteLabelcontent {
+    font-size: 16px;
+  }
+
+  .noteLabeltitletwo {
+    min-height: 44px;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .noteLabeldiv {
+    gap: 10px;
+    padding: 0 12px;
+  }
+
+  .noteLabelinput {
+    width: 100%;
+    min-width: 0;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+
+  .noteLabeldiv2 {
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .noteLabelinput2 {
+    width: 100%;
+    min-width: 0;
+    min-height: 200px;
+    font-size: 14px;
+    box-sizing: border-box;
+  }
+
+  .savenotebtn {
+    min-height: 50px;
+    padding: 12px 22px;
+  }
+}
+
+/* desktop*/
+@media screen and (min-width: 1024px) {
+  .notesformbody {
+    padding: 32px 40px;
+  }
+
+  .greetingmessage {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto 30px;
+  }
+
+  .greethello {
+    font-size: 32px;
+  }
+
+  .greetmessage {
+    font-size: 16px;
+  }
+
+  .formcontainer {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px;
+    box-sizing: border-box;
+  }
+
+  .createnotecontainer {
+    gap: 18px;
+    margin-bottom: 32px;
+  }
+
+  .createnotecontainer svg {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+  }
+
+  .create {
+    font-size: 32px;
+  }
+
+  .createnotesmallmessage {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .noteForm {
+    width: 100%;
+    gap: 28px;
+  }
+
+  .noteLabel {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+  }
+
+  .noteLabeldivs,
+  .noteLabel2,
+  .noteLabeldiv,
+  .noteLabeldiv2 {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .noteLabeltitle,
+  .noteLabelcontent {
+    font-size: 18px;
+  }
+
+  .noteLabeltitletwo {
+    min-height: 42px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .noteLabeldiv {
+    min-height: 54px;
+    padding: 0 16px;
+    gap: 12px;
+  }
+
+  .noteLabelinput {
+    width: 100%;
+    min-width: 0;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+
+  .noteLabeldiv2 {
+    padding: 18px;
+    gap: 14px;
+  }
+
+  .noteLabelinput2 {
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+}
+
+  .savenotebtn {
+    min-width: 100px;
+    min-height: 40px;
+    padding: 14px 26px;
+    gap: 12px;
+  }
+
+  .savenotebtn p {
+    font-size: 13px;
+  }
+
+  
 }

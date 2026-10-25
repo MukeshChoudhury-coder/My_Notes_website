@@ -6,7 +6,7 @@ import { ClipLoader } from "react-spinners";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 function ChapterDetail(){
-    const {chapter ,setChapter ,  spin ,  getChapterDetails,updateNote , backToSubject,message,  messagePopup}=useContext(proContext)
+    const {chapter ,setChapter ,  spin ,  getChapterDetails,updateNote , backToSubject}=useContext(proContext)
 ////------- SETTING CONDITION ON UPDATE BUTTON-------------//
 const [on ,  setOn ]=useState(false)
 //--------------------------------------------------------//
@@ -21,14 +21,6 @@ const { id } = useParams();
 
     return(
         <>
-           <div className={styles.popupmessage}
-            style={{
-                          display: messagePopup==="true" ?  "block": "none",
-                        }}
-           >
-                       <p className={styles.popupmessagep}>{message}</p>
-                      </div>
-
            <div className={styles.newcontainer}>
              <div className={styles.backArrow}>
           <ArrowLeft strokeWidth={1.75}  onClick={backToSubject}/>
@@ -62,7 +54,7 @@ const { id } = useParams();
                               <p>Update</p>
                             </button>
 
-                            <button className={styles.Summarybtn}> 
+                            <button className={styles.Summarybtn} disabled={true}> 
                              <Summary strokeWidth={1.75} />
                               <p>Sumarized your notes</p>
                             </button>

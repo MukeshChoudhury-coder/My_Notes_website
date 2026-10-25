@@ -12,7 +12,7 @@ const [homeNotes, setHomeNotes]=useState("create")
 const [spin , setSpin]=useState("")
 //------------MESSAGE----------------------------//
 const [message, setMessage]=useState("")
-const [messagePopup, setMessagePopup]=useState("false")
+const [messagePopup , setMessagePopup]=useState("")
 //------xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx------//
 //-----------MANU BAR HIDE-UNHIDE BUTTON FUNCTIONALITY---//
 const [manubar ,  setManuBra]=useState("hidden")
@@ -125,15 +125,15 @@ setSpin("enable")
              await getSubjectName()
                navigate("/home");
              setSpin("disable")
-              setMessagePopup("true")
+           
         }else if ( res.status===400){
             setMessage(data.message)
               setSpin("disable") 
-               setMessagePopup("true")
+            
         }
         if (res.status >= 501) {
                    setMessage("Server error. Please try again later.");
-                    setMessagePopup("true")
+                  
           }
            
     }catch(err){
@@ -144,9 +144,7 @@ setSpin("enable")
     }finally{
         setSpin("disable") 
     }
-     setTimeout(()=>{
-            setMessagePopup("false")
-         },3000)
+    
 }
 //----------XXXXXXXXX--------------------//
 
@@ -168,11 +166,11 @@ setSpin("enable")
             if(res.ok){
                 const data= await res.json()
                 setMessage(data.message)
-                setMessagePopup("true")
+               
             }
             if (res.status >= 500) {
                   setMessage(data.message)
-                   setMessagePopup("true")
+                 
                    }
       
 
@@ -180,9 +178,6 @@ setSpin("enable")
             console.log(err)
         }
 
-        setTimeout(()=>{
-          setMessagePopup("false")
-        }, 3000)
       }
 
       //---------GETNOTE FROM BACKEND---------------------//
@@ -196,9 +191,9 @@ setSpin("enable")
             })
 
               const data= await res.json()
-            if(res.status===200){
-              setSubjectName(data)
+            if(res.ok){
 
+                setSubjectName( data);
               if(data.length===0){
               setSubMessage("Please create your notes!") 
               }
@@ -217,7 +212,7 @@ setSpin("enable")
  
     useEffect(()=>{
         getSubjectName()
-     },[]) 
+     },[subjectName]) 
    
 
     //-----------GET SUBJECTS DETAIL -------------//
@@ -228,6 +223,7 @@ setSpin("enable")
 });
     const getSubjectDeatils=useCallback(async (val)=>{
           setSpin("enable")
+         
       try{
         const res = await fetch(`${import.meta.env.VITE_API_URL}/user/subDeatial/?sub=${val}`,{method:"GET" , credentials:'include'})
 
@@ -242,6 +238,8 @@ setSpin("enable")
         if(res.ok!==200){
              setSpin("disable")
         }
+
+       
       }catch(err){
         console.log(err)
       }
@@ -293,15 +291,13 @@ setSpin("enable")
              }
              if(res.status>=500){
                 setMessage(data.message)
-                 setMessagePopup("true")
+              
              }
         }catch(err){
             console.log(err)
         }
 
-        setTimeout(()=>{
-             setMessagePopup("false")
-        },3000)
+     
      }
 
      useCallback(()=>{
@@ -335,9 +331,7 @@ setSpin("enable")
      },[])
 
      //-------------DELETE NOTE LOGIC-------------//
-     
      const deleteNote= useCallback(async(id)=>{
-  
         try{
             const res= await fetch(`${import.meta.env.VITE_API_URL}/user/delete/?noteId=${id}`, {
                 method:"DELETE",
@@ -348,35 +342,37 @@ setSpin("enable")
                
                 setMessage(data.message)
                  // popup setting//
-                 setMessagePopup("true")
-            // UI se note remove
+             
+                   
+
+              //---- deleting subject from the ui---//
+    
+            
+            // UI se note remove //
             const deletedNotes= Notes.filter((e)=>{
                 return e._id!==id
             })
+
 
             localStorage.setItem("subjectName", JSON.stringify(deletedNotes))
             setGetNote((oldNotes) =>
                 oldNotes.filter((note) => note._id !== id)
             );
              
-            }
+      
             if(res.status>=500){
                 setMessage(data.message)
                  // popup setting//
-                 setMessagePopup("true")
+             
             }
 
-        // popup setting//
-               setTimeout(()=>{
-                 setMessagePopup('false')
-               },3000)
             
-              
+            }
         }catch(err){
             console.log(err)
         }
         
-     },[Notes])
+     },[])
      //-----SEARCH LOGIC---------//
      const [search ,  setSearch]=useState()
      const getSearch=async()=>{

@@ -5,16 +5,12 @@ import {ClipLoader } from "react-spinners";
 import {useContext} from 'react'
 import { proContext } from '../Provider/Provider';
 function SubjectDetails(){
-    const {Notes, spin , deleteNote, backNavigation, getChapterDetails,navigate, message , messagePopup , setSearch, getSearch, search}=useContext(proContext)
+    const {Notes, spin , deleteNote, backNavigation, getChapterDetails,navigate , setSearch, getSearch, search}=useContext(proContext)
     return (
         <>
       <div className={styles.container}>
         <Navbar />
 
-           <div className={styles.popupmessage}
-                           style={{  visibility: messagePopup==="true" ?  "visible":"hidden",}} >
-                                      <p className={styles.popupmessagep}>{message}</p>
-                                     </div>
         <div className={styles.container2}>
             <div className={styles.gobackicon} onClick={()=>backNavigation()} >
              <ArrowLeft color="#F5F7F6" />
@@ -44,7 +40,7 @@ function SubjectDetails(){
                        <ChevronRight strokeWidth={1.75} color="#F5F7F6" />
                    </div>
                    <div className={styles.chapterchild2} >
-                    <Trash strokeWidth={2.75}  size={20} color="#22C55E"   onClick={(event) => {event.stopPropagation(); deleteNote(e._id);}}/>
+                    <Trash strokeWidth={2.75}  size={20} color="#22C55E"   onClick={(EVENT) => {EVENT.stopPropagation(); deleteNote(e._id) }}/>
                    </div>
                 </div>
               })}
