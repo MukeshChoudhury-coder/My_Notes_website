@@ -33,7 +33,7 @@ function NotesForm(){
        }}
        >
          <label className={styles.noteLabel}>
-
+           
            <div className={styles.noteLabeldivs}>
              <p className={styles.noteLabeltitle}>Subject</p>
             <p className={styles.noteLabeltitletwo}>Enter the subject name (e.g. Computer Science, Physics, etc.)</p>
@@ -62,7 +62,7 @@ function NotesForm(){
         
 
         <label className={styles.noteLabel2}>
-            <p className={styles.noteLabelcontent}>Your Notes</p>
+            <div className={styles.noteLabelcontent}><p className={styles.noteLabelp}>Your Notes</p></div>
             <div className={styles.noteLabeldiv2}>
                <Pencil size={30} strokeWidth={1} color='#22C55E' />
                 <textarea type="text"  placeholder='Start writing your note here..' rows={10} className={styles.noteLabelinput2}

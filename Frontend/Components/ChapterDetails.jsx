@@ -1,10 +1,12 @@
 import { useContext , useState } from "react";
-import { proContext } from "../Provider/Provider";
+import { proContext} from "../Provider/Provider";
 import {SavePlus, ArrowLeft,Summary} from "lucide-react"
 import styles from "../Css_folder/ChapterDetail.module.css"
 import { ClipLoader } from "react-spinners";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import Message from "../Components/Message"
+
 function ChapterDetail(){
     const {chapter ,setChapter ,  spin ,  getChapterDetails,updateNote , backToSubject}=useContext(proContext)
 ////------- SETTING CONDITION ON UPDATE BUTTON-------------//
@@ -19,21 +21,20 @@ const { id } = useParams();
   }
 }, [id])
 
+
     return(
         <>
            <div className={styles.newcontainer}>
              <div className={styles.backArrow}>
           <ArrowLeft strokeWidth={1.75}  onClick={backToSubject}/>
         </div>
+
+        <Message />
              {spin==="enable"? <ClipLoader /> : (<>
                <div className={styles.chapterContainer}>
               
                       <div >
-                         <form className={styles.chapterForm} onSubmit={(e)=>{
-                          e.preventDefault(),
-                          updateNote()
-                          setOn(false)
-                         }}>
+                         <form className={styles.chapterForm}>
                           <label className={styles.chapterlabel}>
                             <p>Chpater</p>
                               <input type="text" 
@@ -49,17 +50,40 @@ const { id } = useParams();
                             ></textarea>
                           </label>
                           <div className={styles.buttonContainer} >
-                            <button className={styles.updatebtn} disabled={!on}  style={{ backgroundColor: on? "#4ADE80" : "#A7B3AD", borderColor: on? "#4ADE80" : "#A7B3AD"}} >
+                            <button className={styles.updatebtn} disabled={!on}  style={{ backgroundColor: on? "#4ADE80" : "#A7B3AD", borderColor: on? "#4ADE80" : "#A7B3AD"}} 
+                            onClick={(e)=>{
+                              e.preventDefault()
+                              setOn(false)
+                               updateNote()
+                            }}
+                            
+                            >
                               <SavePlus strokeWidth={1.75} />
                               <p>Update</p>
                             </button>
 
-                            <button className={styles.Summarybtn} disabled={true}> 
+                            <button className={styles.Summarybtn} 
+                            disabled={chapter.buttonDisable}
+                            onClick={(e)=>{
+                              e.preventDefault()
+                               getAiSummary(chapter._id)
+                            }}
+
+                            style={{ backgroundColor: chapter.buttonDisable? "#A7B3AD" : "#4ADE80", borderColor: chapter.buttonDisable? "#A7B3AD" : "#4ADE80" ,  color: chapter.buttonDisable?  "#F5F7F6" :  "#0B0F0D"}}
+                            > 
                              <Summary strokeWidth={1.75} />
-                              <p>Sumarized your notes</p>
+                             {chapter.buttonDisable===true ? "Summary Generated" : "AI Summary"}
+                             
                             </button>
                           </div>
+                        
                          </form>
+                         <div className={styles.aisummarycontainer}>
+                        <p className={styles.aisummarycontainerp1}> Ai Summary</p>
+
+                        <p className={styles.aisummarycontainerp2}>{chapter. aiSummary}</p>
+                       
+                         </div>
                     </div>
                </div>
              </>)}

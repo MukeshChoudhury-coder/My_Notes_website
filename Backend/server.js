@@ -15,13 +15,16 @@ import sendSubDetails from "./controller/sendSubjectDetail.js"
 import deleteNote from "./controller/deleteNote.js"
 import updateNote from"./controller/updateNote.js"
 import sendSearch from"./controller/SearchData.js"
+import global from "./AiFolder/RateLimiting/globalRtaeLimiting.js"
+import useruserRateLimiter from "./AiFolder/RateLimiting/userAiRateLimiting.js"
+import controllerAi from "./AiFolder/AiController/controllerAi.js"
 //-------------------------------------------//
 
  dotenv.config()
 const app=express()
 
 app.use(cors({
-    origin:(process.env.Frontend_Port),
+    origin:(process.env.Frontent_Port),
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
      credentials: true   
@@ -41,9 +44,9 @@ app.post("/user/logout", logOut)
 app.delete("/user/delete",midd, deleteNote)
 app.put("/user/update",midd, updateNote)
 app.get("/user/search",midd, sendSearch)
-
 //---------------------------------------//
-
+//-----------AI routing---------------//
+app.get("/user/aiSummary",midd,  global,useruserRateLimiter,  controllerAi)
 
 const PORT = process.env.PORT || 3001;
 

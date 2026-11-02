@@ -1,9 +1,8 @@
 import  notesDB from '../Schema/notesschema.js'
 
 const  sendSubjectName=async(req, res)=>{
-const userid= req.use.userId
-
 try{
+  const userid= req.use.userId
 const notes= await notesDB.find({ usersID:userid})
 
 if(notes.length===0){

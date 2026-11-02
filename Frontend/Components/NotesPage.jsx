@@ -1,9 +1,9 @@
 import {useContext} from 'react'
 import { proContext } from '../Provider/Provider';
 import styles from '../Css_folder/NotesPage.module.css'
-import {Search , Funnel, ChevronDown , ArrowDownAZ ,MoveRight} from 'lucide-react'
+import {Search , Funnel, ChevronDown , ArrowDownAZ ,MoveRight,} from 'lucide-react'
 function NotesPage(){
-    const {subjectName , userData , getSubjectDeatils, subMessage}=useContext(proContext)
+    const {subjectName , userData , getSubjectDeatils, subMessage,setSubjectIdentity}=useContext(proContext)
         return(
         <>
         <div className={styles.container} >
@@ -17,7 +17,7 @@ function NotesPage(){
                 <div className={styles.notescontainer}>
                     {subjectName.length===0?<p className={styles.submessagediv}>{subMessage}</p>: (<>
                       {subjectName.map((e,index)=>{
-                        return <div className={styles.notes} key={index} onClick={()=>getSubjectDeatils(e.subject)}>
+                        return <div className={styles.notes} key={index} onClick={()=>{getSubjectDeatils(e.subject) , setSubjectIdentity(e.subject)}}>
                             <p className={styles.title}>{e.subject}</p>
                             <MoveRight color="#F5F7F6" />
                         </div>

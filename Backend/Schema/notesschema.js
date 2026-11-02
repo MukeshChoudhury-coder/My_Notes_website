@@ -7,15 +7,26 @@ const notesSchema= new mongoose.Schema({
     },
    subject:{
         type:String,
-        required:true
+        required:true,
+         trim:true
     },
     chapter:{
         type:String,
-        require:true
+        required:true,
+        trim:true
     },
     notes:{
         type:String,
-        require:true
+        required:true,
+        trim:true
+    },
+    aiSummary:{
+        type:String,
+        default:""
+    },
+    buttonDisable:{
+        type:Boolean,
+        default:false
     }
 })
 

@@ -4,8 +4,9 @@ import {ArrowLeft , Search , ChevronRight , Trash} from "lucide-react"
 import {ClipLoader } from "react-spinners";
 import {useContext} from 'react'
 import { proContext } from '../Provider/Provider';
+import Message from "../Components/Message"
 function SubjectDetails(){
-    const {Notes, spin , deleteNote, backNavigation, getChapterDetails,navigate , setSearch, getSearch, search}=useContext(proContext)
+    const {Notes, spin , deleteNote, backNavigation, getChapterDetails,navigate , setSearch, getSearch, search , message}=useContext(proContext)
     return (
         <>
       <div className={styles.container}>
@@ -16,6 +17,7 @@ function SubjectDetails(){
              <ArrowLeft color="#F5F7F6" />
              <p> Back</p>
            </div>
+           <Message />
 
              <form className={styles.inptsearch}  onSubmit={(e)=>{
               e.preventDefault(),
@@ -26,13 +28,13 @@ function SubjectDetails(){
                          <input type="Text" placeholder='Search your notes.....' className={styles.searchinpt} 
                          value={search}
                          onChange={(e)=>setSearch(e.target.value)}
-                         />
+                        required />
                        </form>
 
             <div className={styles.subjects}>
-              {spin==="enable"? <ClipLoader color="#22C55E"size={40}/> : (<>
-               <div className={styles.chapterContainer}>
-                 {Notes.length===0? <p className={styles.notFoundmessage}>"not found</p> :  Notes.map((e)=>{
+             <div className={styles.chapterContainer}>
+                {spin==="enable"? <ClipLoader color="#22C55E"size={40}/> : (<>
+                 {Notes.length===0? <p className={styles.notFoundmessage}>EMPTY</p> :  Notes.map((e)=>{
                 return <div  className={styles.chaptersdiv} key={e._id} onClick={()=>{getChapterDetails(e._id) ,   navigate(`/chapterdetail/${e._id}`);}}>
                  <div className={styles.chapterchild3}><p className={styles.chapterchild3p}> {e.subject}</p></div>
                    <div className={styles.chapterchild1}>
@@ -44,8 +46,8 @@ function SubjectDetails(){
                    </div>
                 </div>
               })}
-               </div>
               </>)}
+               </div>
             </div>
         </div>
       </div>
@@ -53,3 +55,8 @@ function SubjectDetails(){
     )
 }
 export default SubjectDetails
+
+
+  
+
+      

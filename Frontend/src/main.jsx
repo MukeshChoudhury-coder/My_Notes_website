@@ -10,6 +10,7 @@ createRoot(document.getElementById('root')).render(
      <BrowserRouter>
 <Provider>
       <App />
+     
 </Provider>
  </BrowserRouter>
 

@@ -3,7 +3,7 @@ import styles from '../Css_folder/Login.module.css';
 import { proContext } from '../Provider/Provider';
 import { useContext } from 'react';
 import { ClipLoader } from "react-spinners";
-
+import Message from "../Components/Message"
 function SignUp(){
     const { setSigninLogin, setCreateAccount , createAccount ,  createUserAccount , message ,spin,messagePopup} = useContext(proContext);
      return(
@@ -13,10 +13,9 @@ function SignUp(){
                 <p className={styles.welcomemsg}>Create Account</p>
                 <p className={styles.welcometagline}>Join MyNotes & start taking Notes.</p>
             </div>
-                  <div className={styles.popupmessage}
-                   style={{  visibility: messagePopup==="true" ?  "visible":"hidden",}} >
-                              <p className={styles.popupmessagep}>{message}</p>
-                             </div>
+                  
+               <Message />
+
             <div className={styles.formdiv}>
                 <form onSubmit={(e)=>{
                    e.preventDefault()

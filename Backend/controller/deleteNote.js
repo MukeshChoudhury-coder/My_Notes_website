@@ -5,8 +5,6 @@ async function deleteNote(req, res){
   const noteId= req.query.noteId
  const userId= req.use.userId
    const result = await notesDB.deleteOne({usersID:userId , _id:noteId})
-   console.log(result)
-   
    if(result.deletedCount === 1){
   return   res.status(200).json({message:"note deleted successfully"})
    }

@@ -6,8 +6,12 @@ async function sendSubDetails(req, res){
    const userId= req.use.userId
     const subjects= await notesDB.find({usersID:userId, subject:userSubject})
     
- res.status(200).json(subjects)
-     console.log(subjects)
+ if(subjects.length===0){
+   return res.status(200).json([])
+ }else{
+   res.status(200).json(subjects)
+ }
+
  }catch(err){
     console.log(err)
  }

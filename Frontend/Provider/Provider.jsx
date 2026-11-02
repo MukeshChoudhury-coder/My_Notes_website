@@ -12,6 +12,7 @@ const [homeNotes, setHomeNotes]=useState("create")
 const [spin , setSpin]=useState("")
 //------------MESSAGE----------------------------//
 const [message, setMessage]=useState("")
+const [dispMess , setDispMess]=useState(false)
 const [messagePopup , setMessagePopup]=useState("")
 //------xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx------//
 //-----------MANU BAR HIDE-UNHIDE BUTTON FUNCTIONALITY---//
@@ -31,6 +32,8 @@ const [manubar ,  setManuBra]=useState("hidden")
     //------ EventListener on SIGNUP-LOGIN buttons-----//
     const [signinLogin, setSigninLogin]=useState("disable")
     //-------------------------------------------------//
+
+
 
     //----------------CREATE ACCOUNT -----------------//
     const [ createAccount, setCreateAccount]=useState({ name:"", email:"",password:""})
@@ -53,19 +56,19 @@ const [manubar ,  setManuBra]=useState("hidden")
            await getSubjectName()
              navigate("/home");
            setSpin("disable")
-           setMessagePopup("true")
+           setDispMess(true)
            }
-           
-           if(res.status===409){
+
+             if(res.status===409){
               setMessage(data.message)
               setSpin("disable")
-              setMessagePopup("true")
+              setDispMess(true)
            }
            
            if(res.status>=500){
              setMessage(data.message)
             setSpin("disable")
-            setMessagePopup("true")
+            setDispMess(true)
            }
             
         }catch(err){
@@ -74,8 +77,8 @@ const [manubar ,  setManuBra]=useState("hidden")
             setSpin("disable") 
         }
          setTimeout(()=>{
-           setMessagePopup("false")
-         },3000)
+           setDispMess(false)
+         },2000)
     }
    
 //----------------------- XXXXXXXXX-----------------//
@@ -109,8 +112,7 @@ const [userLogin , setUserLogin]=useState({email:"" , password:""})
 
 const login= async()=>{
 setSpin("enable")
-    try{
-         
+    try{  
         const res= await fetch(`${import.meta.env.VITE_API_URL}/user/login`,{
             method:"POST",
             credentials:"include",
@@ -125,15 +127,15 @@ setSpin("enable")
              await getSubjectName()
                navigate("/home");
              setSpin("disable")
-           
+           setDispMess(true)
         }else if ( res.status===400){
             setMessage(data.message)
               setSpin("disable") 
-            
+            setDispMess(true)
         }
         if (res.status >= 501) {
                    setMessage("Server error. Please try again later.");
-                  
+                  setDispMess(true)
           }
            
     }catch(err){
@@ -141,8 +143,12 @@ setSpin("enable")
           setMessage(
             "Unable to connect. Please check your connection and try again."
         );
+        true
     }finally{
-        setSpin("disable") 
+        setSpin("disable")
+        setTimeout(()=>{
+          setDispMess(false)
+        },2000) 
     }
     
 }
@@ -218,19 +224,21 @@ setSpin("enable")
     //-----------GET SUBJECTS DETAIL -------------//
     const [Notes, setGetNote] = useState(() => {
   const savedNotes = localStorage.getItem("subjectName");
-
   return savedNotes ? JSON.parse(savedNotes) : [];
 });
+ 
     const getSubjectDeatils=useCallback(async (val)=>{
           setSpin("enable")
          
       try{
         const res = await fetch(`${import.meta.env.VITE_API_URL}/user/subDeatial/?sub=${val}`,{method:"GET" , credentials:'include'})
 
+         const data= await res.json()
         if(res.ok){
-            const data= await res.json()
-            setGetNote(data)
+         
+               setGetNote(data)
               localStorage.setItem("subjectName", JSON.stringify(data));
+          
             
             navigate("/subjectdetail")
               setSpin("disable")
@@ -246,7 +254,8 @@ setSpin("enable")
     },[Notes])
 
     //----------- CHAPTER DETAIL------------//
-    const [chapter , setChapter]=useState({chapter: "", notes: ""})
+    const [chapter , setChapter]=useState({chapter: "", notes: "" ,  aiSummary: "",
+    buttonDisable: false})
     const getChapterDetails = async (Id) => {
        setSpin("enable");
 
@@ -275,6 +284,38 @@ setSpin("enable")
   }
 };
 
+//--AI SUMMARY GENERATOR----//
+
+    const [aiMessage,  setAiMessage]=useState("")
+ 
+
+async  function getAiSummary(val){
+   
+    try{
+        const res= await fetch(`${import.meta.env.VITE_API_URL}/user/aiSummary?userIds=${val}`,{
+            method:"GET",
+            credentials:"include"
+        })
+
+        const data= await res.json()
+        
+       if (res.ok) {
+      setChapter(prev => ({
+        ...prev,
+        aiSummary: data.aiResponse,
+        buttonDisable: data.buttonDisable
+    }));
+} else {
+    setAiMessage(data.message);
+}
+    }catch(err){
+        console.log(err)
+    }
+}
+useCallback(()=>{
+    getAiSummary()
+},[])
+
      //------------UPDATE NOTES-----------------//
      const updateNote=async()=>{
         try{
@@ -287,14 +328,18 @@ setSpin("enable")
                const data= await res.json()
              if(res.ok){
                 setMessage(data.message)
-                setMessagePopup("true")
+              setDispMess(true)
              }
              if(res.status>=500){
                 setMessage(data.message)
-              
+                setDispMess(true)
              }
         }catch(err){
             console.log(err)
+        }finally{
+          setTimeout(()=>{
+            setDispMess(false)
+          },2000)
         }
 
      
@@ -341,13 +386,7 @@ setSpin("enable")
             if( res.ok){
                
                 setMessage(data.message)
-                 // popup setting//
-             
-                   
-
-              //---- deleting subject from the ui---//
-    
-            
+                 setDispMess(true)
             // UI se note remove //
             const deletedNotes= Notes.filter((e)=>{
                 return e._id!==id
@@ -362,36 +401,41 @@ setSpin("enable")
       
             if(res.status>=500){
                 setMessage(data.message)
-                 // popup setting//
-             
+                setDispMess(true)
             }
 
             
             }
         }catch(err){
             console.log(err)
+        }finally{
+          setTimeout(()=>{
+            setDispMess(false)
+          },2000)
         }
+
         
      },[])
      //-----SEARCH LOGIC---------//
+     const [subIndetity ,  setSubjectIdentity]=useState("")
+ 
      const [search ,  setSearch]=useState()
      const getSearch=async()=>{
       setSpin("enable")
-          Notes, setGetNote
       try{
-         const res= await fetch(`${import.meta.env.VITE_API_URL}/user/search/?data=${search}`,{
+         const res= await fetch(`${import.meta.env.VITE_API_URL}/user/search/?data=${search}&subject=${subIndetity}`,{
           method:"GET",
           credentials:'include'
          })
 
-          const data= await res.json()
+         const data= await res.json()
          if(res.ok){
-            setSpin("disable")
+         
+             setSpin("disable")
        setGetNote(data)
-         }
-         if(res.status===409){
-           setSpin("disable")
-           setMessage(data.message)
+          if(data.length===0){
+            setMessage("Not found")
+          }
          }
          if(res.status>=500){
              setSpin("disable")
@@ -401,6 +445,8 @@ setSpin("enable")
       }catch(err){
         console.log(err)
       }
+
+      
      }
 
     return(
@@ -412,7 +458,7 @@ setSpin("enable")
             manubar ,  setManuBra,spin,
             //----- all the  signup variebles and functions---------------// 
             setSigninLogin, signinLogin ,setCreateAccount , createAccount , createUserAccount,userData,message,
-            messagePopup,
+            messagePopup,dispMess,
      //----- all the  Login variebles and functions---------------//
       userLogin , setUserLogin,login , homeNotes, setHomeNotes,
       //--------------CREATE NOTES LOGIN STARTS HERE-------//
@@ -421,13 +467,13 @@ setSpin("enable")
       //---------1. ADD NOTES LOGIC----------//
       userNote ,  setUserNote , notesData ,subjectName,subMessage,
       //-----------get seubect detail---------//
-      getSubjectDeatils,Notes,
+      getSubjectDeatils,Notes,setSubjectIdentity,
       //----------logout variables----------//
       logOutUser,
       //-----------delete note variable--------//
       deleteNote,
       //--------chapter detail --------//
-      getChapterDetails,chapter,setChapter,
+      getChapterDetails,chapter,setChapter,aiMessage,
       //---search variable---//
        getSearch,setSearch, search
         }}>

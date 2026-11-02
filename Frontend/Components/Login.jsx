@@ -3,8 +3,9 @@ import { Mail , LockKeyhole,LogIn } from "lucide-react"
 import { proContext } from '../Provider/Provider';
 import { useContext } from 'react';
 import { ClipLoader } from "react-spinners";
+import Message from "../Components/Message"
 function Login(){
-const { setSigninLogin , userLogin , setUserLogin ,login , spin,message,messagePopup } = useContext(proContext);
+const { setSigninLogin , userLogin , setUserLogin ,login , spin,message,dispMess } = useContext(proContext);
     return(
         <>
         <div className={styles.loginForm}>
@@ -13,10 +14,8 @@ const { setSigninLogin , userLogin , setUserLogin ,login , spin,message,messageP
                 <p className={styles.welcometagline}>Login to continue your account.</p>
             </div>
                 
-                 <div className={styles.popupmessage}
-                                   style={{  visibility: messagePopup==="true" ?  "visible":"hidden",}} >
-                                              <p className={styles.popupmessagep}>{message}</p>
-                                             </div>
+              < Message />
+                 
             <div className={styles.formdiv}>
                 <form  onSubmit={(e)=>{
                     e.preventDefault()
