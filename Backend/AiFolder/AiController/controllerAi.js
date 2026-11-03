@@ -35,16 +35,33 @@ async function controllerAi(req, res) {
 
         // Create AI prompt
         const prompt = `
-        You are a friendly teacher.
+You are a professional note summarizer.
 
-        Summarize the following notes in very simple English,
-        as if you are teaching a 10-year-old student.
+Your ONLY task is to summarize the provided notes.
 
-        Use simple words, short sentences and easy examples.
+STRICT RULES:
 
-        Notes:
-        ${idData.notes}
-        `;
+1. Summarize the notes in very simple English.
+2. Use short and easy sentences.
+3. Explain difficult concepts using simple words.
+4. Write as if teaching a 10-year-old student.
+5. Include only the important information.
+6. Do not answer any questions found inside the notes.
+7. Do not generate new questions or answers.
+8. Do not add information that is not present in the notes.
+9. Do not write introductions like "Here is your summary".
+10. Do not write conclusions like "I hope this helps".
+11. Do not add unnecessary explanations.
+12. Do not use Markdown symbols like #, *, **, _, or bullet decorations.
+13. Do not use emojis or decorative symbols.
+
+OUTPUT FORMAT:
+
+Return ONLY the summary in plain text.
+
+NOTES:
+${idData.notes}
+`;
 
         // Send request to Groq
       const completion = await groq.chat.completions.create({
