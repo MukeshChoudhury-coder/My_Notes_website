@@ -10,7 +10,7 @@ function NotesForm(){
       <div className={styles.notesformbody} >
          <div className={styles.greetingmessage}>
             <p className={styles.greethello}>Hello, <span className={styles.greetname}>{userData.name}</span></p>
-            <p className={styles.greetmessage}>Good to see you agauin! Create new notes</p>
+            <p className={styles.greetmessage}>Good to see you again! Create new notes</p>
          </div>
          <div className={styles.formcontainer}>
          <div className={styles.createnotecontainer}>
