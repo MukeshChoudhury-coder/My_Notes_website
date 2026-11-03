@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import Message from "../Components/Message"
 
 function ChapterDetail(){
-    const {chapter ,setChapter ,  spin ,  getChapterDetails,updateNote , backToSubject , getAiSummary, aiMessage}=useContext(proContext)
+    const {chapter ,setChapter ,  spin ,  getChapterDetails,updateNote , backToSubject , getAiSummary, aiMessage , loader}=useContext(proContext)
 ////------- SETTING CONDITION ON UPDATE BUTTON-------------//
 const [on ,  setOn ]=useState(false)
 //--------------------------------------------------------//
@@ -85,7 +85,7 @@ const { id } = useParams();
                           {aiMessage===""? "AI Summary" : aiMessage}
                         </p>
 
-                        <p className={styles.aisummarycontainerp2}>{!chapter. aiSummary? "Summrizing......." : chapter. aiSummary}</p>
+                        <p className={styles.aisummarycontainerp2}>{loader=== true? "Summrizing......." : chapter. aiSummary}</p>
                        
                          </div>
                     </div>

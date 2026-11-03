@@ -287,10 +287,10 @@ setSpin("enable")
 //--AI SUMMARY GENERATOR----//
 
     const [aiMessage,  setAiMessage]=useState("")
- 
+   const [loader , setLoader]=useState(false)
 
 async  function getAiSummary(val){
-   
+   setLoader(true)
     try{
         const res= await fetch(`${import.meta.env.VITE_API_URL}/user/aiSummary?userIds=${val}`,{
             method:"GET",
@@ -300,12 +300,14 @@ async  function getAiSummary(val){
         const data= await res.json()
         
        if (res.ok) {
+        setLoader(false)
       setChapter(prev => ({
         ...prev,
         aiSummary: data.aiResponse,
         buttonDisable: data.buttonDisable
     }));
 } else {
+  setLoader(false)
     setAiMessage(data.message);
 
 }
@@ -474,7 +476,7 @@ useCallback(()=>{
       //-----------delete note variable--------//
       deleteNote,
       //--------chapter detail --------//
-      getChapterDetails,chapter,setChapter,aiMessage,getAiSummary,
+      getChapterDetails,chapter,setChapter,aiMessage,getAiSummary,loader,
       //---search variable---//
        getSearch,setSearch, search
         }}>
