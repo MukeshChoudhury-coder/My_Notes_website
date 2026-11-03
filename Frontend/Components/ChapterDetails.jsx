@@ -85,7 +85,7 @@ const { id } = useParams();
                           {aiMessage===""? "AI Summary" : aiMessage}
                         </p>
 
-                        <p className={styles.aisummarycontainerp2}>{loader=== true? "Summrizing......." : chapter. aiSummary}</p>
+                        <p className={styles.aisummarycontainerp2}>{loader=== true? "Summarizing......." : chapter. aiSummary}</p>
                        
                          </div>
                     </div>
