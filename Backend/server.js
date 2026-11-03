@@ -22,9 +22,9 @@ import controllerAi from "./AiFolder/AiController/controllerAi.js"
 
  dotenv.config()
 const app=express()
-
+const allowedOrigins = process.env.Frontend_Port.split(",");
 app.use(cors({
-    origin:(process.env.Frontend_Port),
+    origin: allowedOrigins,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
      credentials: true   
