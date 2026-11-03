@@ -18,7 +18,7 @@ async function globalRateLimiter(req, res, next) {
 
             globalData = await globalAi.create({
                 globalCount: 0,
-                limit: 10,
+                limit: 14,
                 startDate: startDate,
                 endDate: endDate
             });

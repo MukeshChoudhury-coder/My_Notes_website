@@ -21,7 +21,7 @@ async function userRateLimiter(req, res, next) {
             userData = await userAi.create({
                 userId: userId,
                 userCount: 0,
-                limit: 5,
+                limit: 3,
                 startDate: startDate,
                 endDate: endDate
             });

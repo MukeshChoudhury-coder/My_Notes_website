@@ -307,6 +307,7 @@ async  function getAiSummary(val){
     }));
 } else {
     setAiMessage(data.message);
+
 }
     }catch(err){
         console.log(err)
@@ -473,7 +474,7 @@ useCallback(()=>{
       //-----------delete note variable--------//
       deleteNote,
       //--------chapter detail --------//
-      getChapterDetails,chapter,setChapter,aiMessage,
+      getChapterDetails,chapter,setChapter,aiMessage,getAiSummary,
       //---search variable---//
        getSearch,setSearch, search
         }}>

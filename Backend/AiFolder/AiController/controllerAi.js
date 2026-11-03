@@ -12,7 +12,7 @@ const groq = new Groq({
 async function controllerAi(req, res) {
     try {
         const authId = req.use.userId;
-        const {ids ,  chapter} = req.query.userIds;
+        const ids  = req.query.userIds;
 
         // Find user's notes
         const idData = await notesDB.findOne({
@@ -47,7 +47,7 @@ async function controllerAi(req, res) {
         `;
 
         // Send request to Groq
-        const completion = await groq.chat.completions.create({
+      const completion = await groq.chat.completions.create({
             model: "openai/gpt-oss-20b",
             messages: [
                 {
@@ -58,7 +58,7 @@ async function controllerAi(req, res) {
         });
 
         // Get AI response
-        const aiAnswer =
+       const aiAnswer =
             completion.choices[0]?.message?.content;
 
         if (!aiAnswer) {
